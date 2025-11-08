@@ -30,8 +30,6 @@
 
 ---
 
-
-It is accepted by the Product Owner in Sprint Review.
 **Definition of Done:**  
 A task or user story is *Done* when::
 1. Code is finished and integrated to the master branch.  
