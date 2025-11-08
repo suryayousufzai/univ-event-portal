@@ -30,7 +30,7 @@
 
 ---
 
-**Definition of Done (DoD):**  
+**Definition of Done:**  
 A task or user story is considered *Done* when:
 1. Code is complete and merged into the main branch.  
 2. It is tested and reviewed by another team member.  
