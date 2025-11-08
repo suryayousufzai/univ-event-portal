@@ -18,8 +18,8 @@
 ### Team Communication Tools  
 - **GitHub** – Code and documentation repository  
 - **Google Meet** – Online Scrum meetings (recorded)  
-- **Trello / GitHub Projects** – Backlog and sprint tracking  
-- **Google Docs / Sheets** – Daily updates, sprint reports  
+- **GitHub Projects** – Backlog and sprint tracking  
+- **Google Docs** – Daily updates, sprint reports  
 
 ---
 
