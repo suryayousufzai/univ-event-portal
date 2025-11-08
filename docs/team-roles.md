@@ -30,12 +30,14 @@
 
 ---
 
+
+It is accepted by the Product Owner in Sprint Review.
 **Definition of Done:**  
-A task or user story is considered *Done* when:
-1. Code is complete and merged into the main branch.  
-2. It is tested and reviewed by another team member.  
+A task or user story is *Done* when::
+1. Code is finished and integrated to the master branch.  
+2. Another team member reviews and tests it.  
 3. Documentation is updated.  
-4. The Product Owner accepts it during Sprint Review.  
+4. It is accepted by the Product Owner in Sprint Review.  
 
 ---
 
