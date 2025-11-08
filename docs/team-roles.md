@@ -7,11 +7,11 @@
 
 | Role | Member Name | Responsibilities |
 |------|--------------|------------------|
-| **Product Owner** | Marwa Paiman | Creates and maintains the Product Backlog; sets project priorities; hosts Sprint Planning and Sprint Review meetings; accepts or rejects completed work; communicates with stakeholders; ensures requirements are clear and updated. |
-| **Scrum Master** | Surya Yousufzai | Facilitates all Scrum meetings (Daily Stand-ups, Sprint Planning, Review, and Retrospective); removes team obstacles; ensures the team follows Scrum principles; maintains sprint schedule; updates Scrum board; motivates team members; keeps meeting minutes. |
-| **Developer 1 / Backend Lead** | Fariba Mohammadi | Designs and implements backend system (APIs, database); handles data storage, authentication, and server logic; writes technical documentation; helps with integration testing. |
-| **Developer 2 / Frontend Lead** | Muneera Aman | Develops the user interface of the web portal; ensures responsive and accessible design; integrates frontend with backend APIs; handles UI testing and debugging. |
-| **Developer 3 / QA & DevOps Engineer** | Gita Rahmany | Performs software testing and quality assurance; writes and runs test cases; manages version control on GitHub; automates build and deployment (if possible); maintains meeting recordings and documentation. |
+| **Product Owner** | Marwa Paiman | Creates the Product Backlog, maintains its completeness and ensures that all successive entries are clear and updated; prioritises the project help deliver results there on time; hosts Sprint Planning meetings and approve content for each sprint as well as reviews during sprints; accepts or rejects work result according to acceptance test driven development (ATDD) rules; communicates with stakeholders; acts as a conduit between the team, on which they must rely heavily (or close to exclusively), in terms of legitimacy of ends versus practices. |
+| **Scrum Master** | Surya Yousufzai | Leads all Scrum meetings (Daily Stand-ups, Sprint Planning, Review & Retrospective); removes team impediments; ensures adherence to practice of Scrum principles; maintains sprint schedule and update Scrum board; motivates individuals within the team; takes meeting minutes. |
+| **Developer 1 / Backend Lead** | Fariba Mohammadi | Designs and develops backend system, including (but not limited to) APIs, database; handles the data storage and authentication as well as the server-side logic; writes technical documentation; senior contributor on integration testing opportunities. |
+| **Developer 2 / Frontend Lead** | Muneera Aman | Designs the website's front-end and developers responsive pages, accessibility etc; couples the front end with back end APIs; takes care of UI testing, debugging. |
+| **Developer 3 / QA & DevOps Engineer** | Gita Rahmany | Conducts software testing and quality assurance; writes test cases, runs tests, and keeps records; repository managers will provide version control through GitHub (automated build/deployment if possible); maintains meeting recordings, documentation. |
 
 ---
 
