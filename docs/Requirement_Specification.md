@@ -43,8 +43,8 @@ It is a web application on its own, which has a service that links to a database
 
 #### 2.2 Product Functions  
 Main functions:  
-- User registration & login  
-- Event browsing & search  
+- User registration and login  
+- Event browsing and search  
 - Registration for events  
 - Payment (for paid events)  
 - Ticket confirmation  
