@@ -1,4 +1,4 @@
-# Use Case Descriptions – University Event Registration Portal
+# Use case descriptions – University event registration portal
 
 ---
 
