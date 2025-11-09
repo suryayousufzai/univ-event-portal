@@ -11,7 +11,7 @@
 | **Scrum Master** | Surya Yousufzai | Leads all Scrum meetings (Daily Stand-ups, Sprint Planning, Review & Retrospective); removes team impediments; ensures adherence to practice of Scrum principles; maintains sprint schedule and update Scrum board; motivates individuals within the team; takes meeting minutes. |
 | **Developer 1 / Backend Lead** | Fariba Mohammadi | Designs and develops backend system, including (but not limited to) APIs, database; handles the data storage and authentication as well as the server-side logic; writes technical documentation; senior contributor on integration testing opportunities. |
 | **Developer 2 / Frontend Lead** | Muneera Aman | Designs the website's front-end and developers responsive pages, accessibility etc; couples the front end with back end APIs; takes care of UI testing, debugging. |
-| **Developer 3 / QA & DevOps Engineer** | Gita Rahmany | Conducts software testing and quality assurance; writes test cases, runs tests, and keeps records; repository managers will provide version control through GitHub (automated build/deployment if possible); maintains meeting recordings, documentation. |
+| **Developer 3 / QA & DevOps Engineer** | Gita Rahmany |Software testing and quality checking; creates test cases, executes tests, logs, repository managers will be in place to offer version control mechanism using GitHub (auto build/deploy wherever possible); recordings and documentation of meetings, documentation.|
 
 ---
 
