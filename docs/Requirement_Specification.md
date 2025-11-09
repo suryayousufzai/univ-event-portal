@@ -48,7 +48,7 @@ Main functions:
 - Registration for events  
 - Payment (for paid events)  
 - Ticket confirmation  
-- Admin management of events & users  
+- Admin management of events and users  
 
 #### 2.3 User Characteristics  
 - **Students/Staff/Guests:** Need a simple, easy-to-use interface.  
