@@ -16,10 +16,10 @@
 ---
 
 ### Team Communication Tools  
-- **GitHub** – Code and documentation repository  
-- **Google Meet** – Online Scrum meetings (recorded)  
-- **GitHub Projects** – Backlog and sprint tracking  
-- **Google Docs** – Daily updates, sprint reports  
+- **GitHub** – Code and documentation  
+- **Google Meet** – Online Scrum meetings 
+- **GitHub Projects** – backlog and sprint tracking  
+- **Google Docs** – Daily updates and sprint reports  
 
 ---
 
