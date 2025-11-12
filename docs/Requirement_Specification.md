@@ -124,5 +124,5 @@ Date: November 9, 2025
 ### PO Review and Approval
 _Product Owner:_ Marwa Paiman  
 Review date: November 12, 2025  
-_Approval statement:_ "I have reviewed this Requirements Specification and confirm it correctly reflects the current product vision and priorities. I accept the SRS as the starting point for creating the Product Backlog and Sprint work."  
+_Approval statement:_ "I have read this Requirements Specification and ensured that it is an accurate representation of the current product vision and priorities. I agree with the SRS as my initial point to develop the Product Backlog and Sprint work."  
 
