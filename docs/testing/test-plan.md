@@ -1,38 +1,76 @@
-# University Event Registration Portal
-# Test Plan
+# University Event Registration Portal – Test Plan
 
-## Objective:
-The objective of this test plan is to ensure all the functionalities of the University Event Registration Portal works properly and smoothly. It ensures that the system is secure and is based on the backlog and the user’s stories. The aim of the testing is to ensure that the registration system, log in system, user experience with the front end and the back end, and system adaptability is stable. 
+## 1. Objective
 
-## Testing Types:
-**Integration Testing**  
-Ensures that the frontend and backend system integrates, connects, and works together properly.   
-**Unit Testing**  
-Ensures that each component in the system functions independently and properly both in backend and frontend such as the buttons.  
-**Functional Testing**  
-Tests each functionality of the system including the log in, registration, payments, and events creation and registration by users.  
-**Security  Testing**  
-Ensures the users security and data protection by checking that the system is enforced in HTTPS, passwords are secure and strong, and checks the users, admin, and administrator access.  
-**Usability Testing**  
-Ensures that the system is usable, responsive, and easy to use for the users.   
-**Regression Testing**  
-Tests that after completion of each sprint, the system works properly and keeps its functionality after the new updates and features.   
+The purpose of this test plan is to ensure that all features of the University Event Registration Portal work correctly, smoothly, and securely. The testing is based on the Product Backlog and User Stories. This test plan confirms stability, data protection, correct system behavior, and good user experience for both frontend and backend.
 
-## Test Scenarios:
-TC-001: User registers and creates a valid account.  
-TC-002: User log in with correct user account and redirected to dashboard.  
-TC-003: User with invalid user account is shown an error message.  
-TC-004: Admin adds an event and the event is listed in the options list.  
-TC-005: User registers for an event successfully and does the payment then gets their registration ticket.  
-TC-006: User cancels their registration and receives a confirmation message, and their payment is refunded.  
-TC-007: The system runs stably, stays responsive, and doesn’t crash when overloaded.  
+## 2. Testing Types
 
-## Tools:
-GitHub: for system automation and testing.  
-Postman: for testing APIs requests.    
-Manual Testing   
-—----------------------------------------------------------------------------------------------------------------------------
-Prepared by: Gita Rahmany (Quality Assurance & DevOps Engineer)    
-Date: November 14, 2025 
+### 2.1 Integration Testing
+* Ensures that the frontend and backend work together correctly (API requests, data flow, responses).
 
+### 2.2 Unit Testing
+Tests individual components such as:
+* Login function  
+* Registration function  
+* Buttons, forms, validation  
+* API endpoints  
 
+### 2.3 Functional Testing
+Verifies that every feature works as expected, including:
+* Login  
+* Registration  
+* Event browsing  
+* Event creation (Admin)  
+* Payments  
+* Cancellations  
+
+### 2.4 Security Testing
+Ensures:
+* HTTPS enforced  
+* Passwords stored securely  
+* Role-based access control (admin vs user)  
+* No unauthorized access allowed  
+* Input validation to prevent attacks  
+
+### 2.5 Usability Testing
+Confirms:
+* Interface is simple and easy to use  
+* Pages are responsive  
+* Buttons, forms, and messages are clear  
+
+### 2.6 Regression Testing
+After every sprint:
+* All old features are re-tested  
+* New changes do not break previous functionality  
+
+### 2.7 Performance / Load Testing
+Tests that the system:
+* Handles up to 100 users at the same time  
+* Does not slow down or crash  
+
+## 3. Test Scenarios
+
+| Test Case ID | Scenario | Expected Result |
+|--------------|----------|-----------------|
+| TC-001 | User registers with valid information | Account created and confirmation email sent |
+| TC-002 | User logs in with correct credentials | User is redirected to dashboard |
+| TC-003 | User logs in with incorrect credentials | Error message displayed |
+| TC-004 | Admin creates a new event | Event is visible in event list |
+| TC-005 | User registers and pays for an event | Registration stored, payment confirmed, ticket sent |
+| TC-006 | User cancels a registration | Seat released, cancellation email sent, refund processed |
+| TC-007 | System under high load (100 users) | System remains stable and responsive |
+| TC-008 | Unauthorized user tries to access admin pages | Access denied |
+| TC-009 | Payment fails due to invalid card | Error message shown, no ticket generated |
+| TC-010 | User updates their profile | Details updated and saved |
+
+## 4. Tools Used
+
+* GitHub – Version control, CI/CD, documentation  
+* Postman – API testing  
+* Manual Testing – UI, behavior, and usability checks  
+
+---
+
+**Prepared By:** Gita Rahmany – QA & DevOps Engineer  
+**Date:** November 14, 2025
