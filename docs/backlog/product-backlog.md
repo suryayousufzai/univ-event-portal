@@ -1,9 +1,3 @@
-
-
-
-
-
-
 **University Event Registration Portal Backlog**
 
 **Marwa Paiman (Product Owner)**
@@ -11,16 +5,6 @@
 **Software Engineering - ITC315** 
 
 **13/11/2025**
-
-
-
-
-
-
-
-
-
-
 
 **1. Introduction**
 
