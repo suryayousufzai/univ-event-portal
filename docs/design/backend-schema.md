@@ -1,9 +1,9 @@
-Add Friba
-# Backend Database Schema - University Event Registration Portal
+ # University Event Registration Portal
+ ## Backend Database Schema
 ---
 
 ## Objective
-In this part, the backend system will be using database to sort out the data that saves in this portal. MySQL is the prefered database software to store all data about users, events, and registrations in a very effective and srecure way.  
+In this part, the backend system will be using database to sort out the data that saves in this portal. MySQL is the prefered database software to store all data in the separated tables about users, events, and registrations in a very effective and secure way.  
 
 ---
 
@@ -59,16 +59,5 @@ In this part, the backend system will be using database to sort out the data tha
 
 ---
 
-## API Endpoints - example
-| Endpoint | Method | Description |
-|-----------|---------|-------------|
-| /api/register | POST | Register new user |
-| /api/login | POST | User authentication |
-| /api/events | GET | List all events |
-| /api/events/:id/register | POST | Register for event |
-| /api/payments | POST | Payment request |
-
----
-
 *Written by:* Fariba Mohammadi (Backend Lead Developer)  
-*Date:* November 16, 2025  
+*Date:* November 14, 2025  
