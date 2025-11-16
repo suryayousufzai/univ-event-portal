@@ -64,10 +64,10 @@ It is the second daily Scrum. The team communicated the things they finished sin
 ## Decisions & Next Steps
 1. **Marwa** will upload the finalized Product Backlog to GitHub tonight.  
 2. Team members will review the backlog after upload and give feedback.  
-3. After backlog review, the team will prepare for the Sprint Planning meeting (to be scheduled).  
+3. After backlog review, the team will prepare for sequence diagrams.  
 4. **Fariba** will verify the DB structure against the uploaded backlog.  
 5. **Muneera** will finalize UI flows for login and events once backlog is confirmed.  
-6. **Gita** will upload the test plan and prepare Sprint 1 test cases after backlog is finalized.  
+6. **Gita** will upload the test plan.  
 7. **Surya** (Scrum Master) will coordinate the next meeting and Sprint Planning time.
 
 ---
