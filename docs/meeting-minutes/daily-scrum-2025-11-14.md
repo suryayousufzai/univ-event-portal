@@ -85,6 +85,8 @@ In order to recap on the progress in the Sequence Diagrams, ensure that work is 
 **Blockers:** None reported.
 
 ---
+## Recording
+- **Recording link:** https://drive.google.com/file/d/1zhpxUtkjAe8YqGZdfasmrwI2Ftq476Z6/view?usp=drive_link
 
 ## Next Meeting
 **Meeting Type:** Sprint Planning  
