@@ -116,10 +116,6 @@ Main functions:
 
 ---
 
-**Prepared by:**  
- Marwa Paiman(Product Owner) and Surya Yousufzai (Scrum Master)  
-University Event Registration Portal Project  
-Date: November 9, 2025
 
 ### PO Review and Approval
 _Product Owner:_ Marwa Paiman  
