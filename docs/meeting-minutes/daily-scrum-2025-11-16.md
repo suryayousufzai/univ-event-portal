@@ -1,4 +1,4 @@
-
+ # daily scrum meeting #5 – november 16, 2025
 
 **project:** university event registration portal  
 **sprint:** sprint 1 (day 1)  
