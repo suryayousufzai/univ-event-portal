@@ -1,9 +1,9 @@
- # daily scrum meeting #5 – november 16, 2025
+ # daily scrum meeting #4 – november 16, 2025
 
 **project:** university event registration portal  
 **sprint:** sprint 1 (day 1)  
 **meeting type:** daily scrum  
-**duration:** 15 mins  
+**duration:** 7 mins  
 **time:** 10:00 am  
 **platform:** google meet  
 
