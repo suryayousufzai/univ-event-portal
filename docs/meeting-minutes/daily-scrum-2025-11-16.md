@@ -150,7 +150,7 @@ none reported 👍
 ---
 
 ## next daily scrum
-**november 17, 2025 — 10:00 am — google meet**
+**november 17, 2025 — 10:00 am — Zoom**
 
 ---
 
