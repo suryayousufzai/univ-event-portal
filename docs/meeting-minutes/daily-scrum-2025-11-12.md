@@ -1,7 +1,7 @@
 # 🧑‍💻 Daily Scrum Meeting #1 – November 12, 2025  
 **Project:** University Event Registration Portal  
 **Meeting Type:** Daily Scrum #1  
-**Duration:** 5 minutes  
+**Duration:** 7 minutes  
 **Platform:** Google Meet  
 
 ---
