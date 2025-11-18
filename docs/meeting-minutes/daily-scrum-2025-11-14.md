@@ -1,7 +1,7 @@
 # 🧑‍💻 Daily Scrum Meeting #3 – November 14, 2025
 **Project:** University Event Registration Portal  
 **Meeting Type:** Daily Scrum (Meeting #3)  
-**Duration:** ~10 minutes  
+**Duration:** 6 minutes  
 **Platform:** Google Meet  
 
 ---
