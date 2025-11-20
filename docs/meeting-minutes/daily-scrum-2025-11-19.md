@@ -2,7 +2,8 @@
 Sprint 1 – Day 4  
 
 **Project:** University Event Registration Portal  
-**Meeting Type:** Daily Scrum 
+**Meeting Type:** Daily Scrum
+
 **Duration:** ~18 minutes  
 **Platform:** Zoom / Recorded 
 
