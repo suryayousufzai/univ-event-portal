@@ -5,7 +5,7 @@
 - [Daily Scrum #2 - Nov 13](https://drive.google.com/file/d/1RhWXMFSKOLpsrCooRTxuZWO95M-QGHUG/view)
 - [Daily Scrum #3 - Nov 14](https://drive.google.com/file/d/1zhpxUtkjAe8YqGZdfasmrwI2Ftq476Z6/view)
 - [Daily Scrum #4 - Nov 16](https://drive.google.com/file/d/18XxXVEpTfTFkPn8H2ViTNOWhFmXp6XyL/view?usp=drive_link)
-- Daily Scrum #5 - Nov 17 
+- [Daily Scrum #5 - Nov 17](https://drive.google.com/file/d/145D6iFhDYAso_0BiYWeP2gwrn_RU6BJm/view?usp=drive_link)
 - Daily Scrum #6 - Nov 18 
 - Daily Scrum #7 - Nov 19 
 - Daily Scrum #8 - Nov 20 
