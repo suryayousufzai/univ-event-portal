@@ -2,7 +2,9 @@
 **Sprint 1 — Day 3**
 
 **Project:** University Event Registration Portal  
-**Time:** 10:00 AM Zoom
+**Meeting Type:** Daily Scrum  
+**Duration:** ~14 minutes  
+**Platform:** Zoom / Recorded
 
 ---
 
