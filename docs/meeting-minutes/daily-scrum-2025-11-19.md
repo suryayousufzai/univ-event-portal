@@ -1,6 +1,10 @@
 # Daily Scrum Meeting – November 19, 2025  
 Sprint 1 – Day 4  
-Time: 10:00 AM  
+
+**Project:** University Event Registration Portal  
+**Meeting Type:** Daily Scrum 
+**Duration:** ~18 minutes  
+**Platform:** Zoom / Recorded 
 
 ## Attendees
 - Surya – Scrum Master  
