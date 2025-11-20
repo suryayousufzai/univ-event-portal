@@ -1,239 +1,159 @@
-# Daily Scrum Meeting - November 19, 2025
-
-**Sprint:** Sprint 1 (Day 4 of 7)  
-**Date:** Thursday, November 19, 2025  
-**Time:** 10:00 AM – 10:15 AM  
-**Location:** Zoom  
-**Weather:** ☀️ Felt like a productive day
-
----
+# Daily Scrum Meeting – November 19, 2025  
+Sprint 1 – Day 4  
+Time: 10:00 AM  
 
 ## Attendees
-- **Surya Yousufzai** – Scrum Master  
-- **Marwa Paiman** – Product Owner  
-- **Fariba Mohammadi** – Backend Developer  
-- **Muneera Aman** – Frontend Developer  
-- **Gita Rahmany** – QA & DevOps  
-
-Everyone joined on time. Good mood all around.
+- Surya – Scrum Master  
+- Marwa – Product Owner  
+- Fariba – Backend Lead  
+- Muneera – Frontend Lead  
+- Gita – QA & DevOps  
 
 ---
 
-## Team Mood
-Energy was high today. Everyone had solid updates, and the first real bug showed up—meaning QA is fully in action now. Collaboration is going smoothly.
+## Meeting Summary
+This meeting covered updates from each team member based on what they completed yesterday, what they are doing today, and whether they have any blockers. The team is progressing well, and the workflow for Sprint 1 is on track.
 
 ---
 
-## Surya’s Opening
-I kicked things off with a quick recap of yesterday and reminded the team we’re already past halfway through Sprint 1. Then I handed it over to Fariba for her updates.
+## Backend Update – Fariba
 
----
+### What was done yesterday
+- Completed the Login API (`POST /api/login`).
+- Added email and password validation.
+- Implemented JWT token generation (24-hour validity).
+- Returned user details on success (ID, name, email, role).
+- Added clear error messages for incorrect credentials.
+- Tested the API in Postman and confirmed expected responses.
+- Shared the Postman collection with Gita.
+- Started working on the Events List API.
 
-## Fariba’s Update (Backend)
-
-### Yesterday
-Fariba wrapped up the **Login API**, and everything is working exactly as planned:
-- Email + password validation  
-- JWT token (24-hour expiry)  
-- User details sent back  
-- Clear error messages  
-
-She tested everything in Postman and shared it with Gita.  
-She also began the **Events List API**, even though it wasn’t required yet — ahead of schedule.
-
-### Today
-- Complete **Events List API** (`GET /api/events`)  
-- Add category filter + search  
-- Possibly add pagination  
-- Write documentation  
-- Support frontend integration if needed  
+### What will be done today
+- Finish the Events List API (`GET /api/events`).
+  - Include category filtering (e.g., workshop, conference).
+  - Add keyword-based search.
+  - Add pagination if time allows.
+- Write documentation for the new API.
+- Assist in backend–frontend integration once the frontend is ready.
 
 ### Blockers
 None.
 
 ---
 
-## Muneera’s Update (Frontend)
+## Frontend Update – Muneera
 
-### Yesterday
-She finished the **Registration Page** with:
-- All form fields  
-- Validation  
-- Password strength indicator  
-- Live error messages  
-- Redirect after success  
-- Clean Tailwind design  
-- Responsive layout  
-- Matches Figma layout really well  
+### What was done yesterday
+- Completed the Registration Page UI.
+- Added all required fields: full name, email, password, confirm password, student ID.
+- Implemented form validation and password strength indicator.
+- Added a success message and automatic redirect to the login page.
+- Styled the page using Tailwind and made it responsive.
+- Pushed the work to `feature/registration-UI`.
+- Started basic structure for the Events List Page.
 
-She also started the Events List page structure.
-
-### Today
-- Finish UI for **Events List page**  
-  - Cards for events  
-  - Image, title, date, location, price  
-  - Show “Free” for free events  
-- Add search + filter  
-- Start backend integration tomorrow  
+### What will be done today
+- Complete the Events List Page:
+  - Event cards with image, title, date, location, and price.
+  - “Free” badge for events with no cost.
+- Add search bar and category filter.
+- Improve responsiveness.
+- Prepare for backend integration for registration and login pages.
 
 ### Blockers
 None.
 
 ---
 
-## Gita’s Update (QA & DevOps)
+## QA & DevOps Update – Gita
 
-### Yesterday
-Gita started running test cases. Her results:
+### What was done yesterday
+Completed the following test cases:
+- TC-001: Valid registration — Passed  
+- TC-002: Login with correct credentials — Passed  
+- TC-003: Wrong password — Passed  
+- TC-004: Duplicate email — Failed  
 
-- **TC-001:** Register valid data → Passed  
-- **TC-002:** Login valid → Passed  
-- **TC-003:** Login wrong password → Passed  
-- **TC-004:** Register duplicate email → ❌ Failed  
+### Bug Report
+**BUG-001**  
+- Issue: Duplicate email returns a 500 server error.  
+- Expected: A user-friendly message such as “Email already registered.”  
+- Reported to Fariba.  
+- Severity: Major but simple to fix.
 
-**BUG-001 Found:**  
-- Duplicate email crashes server (500 error)  
-- Should show “Email already registered”
-
-Fariba confirmed it’s a quick fix.
-
-### Today
-- Retest once bug is fixed  
-- Continue with:
-  - Email format checks  
-  - Password rules  
-  - Event browsing  
-  - Negative login tests  
+### What will be done today
+- Retest TC-004 after the bug fix.
+- Continue executing test cases:
+  - Browse events
+  - Password validation
+  - Email format checks
+  - Additional login scenarios
 
 ### Blockers
-Waiting on bug fix (but it’s small).
+Waiting for Fariba to finish the fix for BUG-001.
 
 ---
 
-## Marwa’s Update (Product Owner)
-Marwa tested the registration and login screens herself and said the UI feels smooth and professional.
+## Product Owner Update – Marwa
+- Tested both the registration and login pages personally.
+- Confirmed that both pages match the Figma design.
+- Reviewed BUG-001 and agreed that duplicate email should not throw a server error.
+- Clarified display for free events: it should show “Free” instead of “$0.00”.
+- No updates needed for the backlog today.
 
-She approved the bug report and made one decision today:
-
-- Free events must show **“Free”**, not “$0.00”
-
-She is available for reviews anytime.
+### Blockers
+None.
 
 ---
 
-## Bug Discussion
-**BUG-001:** Duplicate email causing server crash.
-
-**Fix Plan by Fariba:**
-1. Check if email exists  
-2. If yes → return 400 with friendly message  
-3. Otherwise insert normally  
-
-Estimated time: ~30 minutes.
-
-No stress, team handled it positively.
+## Team Discussion
+- Gita explained the duplicate email bug and how it affects the registration flow.
+- Fariba confirmed that the fix will take about 30 minutes:
+  - Check for existing email before inserting the user.
+  - Return a 400 error with a clear message.
+- Gita will retest immediately after the fix.
+- Frontend and backend integration can start tomorrow morning.
+- Overall progress is ahead of schedule.
 
 ---
 
 ## Action Items
 
-### **Fariba**
-- Fix BUG-001  
-- Finish Events List API  
-- Update documentation  
+### Fariba
+- Fix BUG-001 in the morning.  
+- Notify the team once fixed.  
+- Complete Events List API.  
+- Write API documentation.  
 
-### **Gita**
-- Retest registration  
-- Continue new test cases  
+### Gita
+- Retest TC-004 after the bug fix.  
+- Continue executing remaining test cases.  
 
-### **Muneera**
-- Finish Events List UI  
-- Prep for integration  
-
-### **Surya**
-- Update sprint board  
-- Track bug fix & testing  
-
-### **Marwa**
-- Review bug fix later  
-- Provide feedback anytime  
-
----
-
-## Sprint Progress (Day 4)
-
-### **US-001 – Registration**
-Backend: 100%  
-Frontend: 100%  
-Testing: 75%  
-**Overall: ~90%**
-
-### **US-002 – Login**
-Backend: 100%  
-Frontend: 100%  
-Testing: In progress  
-**Overall: ~85%**
-
-### **US-004 – Browse Events**
-Backend: ~40%  
-Frontend: ~30%  
-**Overall: ~45%**
-
-### **Security**
-Most parts done (JWT, validation, hashing)
-
----
-
-## Decisions
-- “Free” should display as **Free**  
-- Bug fix prioritized  
-- Integration starts tomorrow  
+### Muneera
+- Complete Events List UI.  
+- Prepare for integration tomorrow.  
 
 ---
 
 ## Blockers
-Only one small blocker (BUG-001 testing delay).  
-**Overall risk: Low**
-
----
-
-## Highlights
-- **Fariba:** MVP today  
-- **Muneera:** Clean and consistent UI  
-- **Gita:** Found first official bug  
-- **Marwa:** Quick approvals  
-- **Surya:** Keeping everything aligned  
-
-Team morale: very high
-
----
-
-## Funny Moment
-When Surya said “We might finish early,”  
-Muneera instantly said, “Don’t jinx it!”  
-Everyone laughed
-
----
-
-## Links
-- **Recording:** **  
-- Sprint Board  
-- Repository  
-- Bug Report  
+- Only temporary blocker: Gita waiting for bug fix.  
+- No other blockers reported.
 
 ---
 
 ## Next Meeting
-**Tursday, Nov 20 – 10:00 AM**
+Daily Scrum  
+Date: November 20, 2025  
+Time: 10:00 AM  
+Platform: Zoom  
 
 ---
 
-## Notes
-Recorded by: Surya  
-Reviewed by: Marwa  
-Approved: Nov 19, 2025
+## Recording
+(https://drive.google.com/file/d/1fSvvbHTv0_RzvSE51HUUdNJf18VcaC4n/view?usp=drive_link
+https://drive.google.com/file/d/1TgIvY7RRNDRTFTYYRHto0JZIcUZOsEtF/view?usp=drive_link)
 
 ---
 
-## Summary
-**Strong day: testing started, one bug found, quick fix planned, UI and API progressing fast, team fully aligned.**
+**Prepared by:** Surya (Scrum Master)  
+**Date:** November 19, 2025
