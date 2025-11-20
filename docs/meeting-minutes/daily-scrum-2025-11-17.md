@@ -35,7 +35,7 @@ good morning team! it’s day 2 of sprint 1. yesterday was mostly setup. today l
 - finished `users` and `events` tables  
 - started `registrations` table  
 - added 5 test users + 10 sample events  
-- db setup almost done 🎉
+- db setup almost done 
 
 **today:**
 - complete `registrations` & `payments` tables  
@@ -55,7 +55,7 @@ good morning team! it’s day 2 of sprint 1. yesterday was mostly setup. today l
 - set up folder structure (components, pages, services)  
 - installed router, axios, tailwind  
 - made basic navbar + footer  
-- routing is ready 👍
+- routing is ready 
 
 **today:**
 - work on login page ui  
@@ -137,7 +137,7 @@ good morning team! it’s day 2 of sprint 1. yesterday was mostly setup. today l
 
 ---
 
-## 💬 discussion
+## discussion
 
 **Fariba:** “using bcrypt with 10 salt rounds – is that ok?”  
 → **Marwa:** “yes, that’s standard. go ahead.”
@@ -155,7 +155,7 @@ good morning team! it’s day 2 of sprint 1. yesterday was mostly setup. today l
 ---
 
 ## Blockers / issues
-✨ none reported today
+none reported today
 
 ---
 
