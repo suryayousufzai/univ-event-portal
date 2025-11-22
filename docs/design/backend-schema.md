@@ -58,6 +58,16 @@ In this part, the backend system will be using database to sort out the data tha
 | date | DATETIME | Payment date |
 
 ---
+### API Endpoints 
+| Endpoint  | Method  | Description   |
+|-----------|---------|---------------|
+| /api/register | POST | Creates a new user account/Register |
+| /api/login | POST | Logs in an existing user |
+| /api/events | GET | List of all available events |
+| /api/events/:id/register | POST | Registers the user for an event |
+| /api/payments | POST | Submits a payment request |
+
+---
 
 *Written by:* Fariba Mohammadi (Backend Lead Developer)  
 *Date:* November 14, 2025  
