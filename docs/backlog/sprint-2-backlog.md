@@ -94,5 +94,6 @@
 
 ---
 
-**Prepared by:** Marwa Paiman (Product Owner)     
+**Product Owner Approval:** ✅ Marwa Paiman  
+**Prepared by:** Surya Yousufzai (Scrum Master)    
 **Date:** November 23, 2025
