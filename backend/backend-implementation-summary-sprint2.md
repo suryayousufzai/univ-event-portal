@@ -1,27 +1,27 @@
 # Backend Implementation Summary - Sprint 2
 
-*Developer:* Fariba Mohammadi (Backend Lead)  
-*Sprint:* Sprint 2 (Nov 23-26, 2025) 
+**Developer:** Fariba Mohammadi (Backend Lead)  
+**Sprint 2:** Nov (23-26) 2025 
 
 ---
 
-## Overview
-Beckend part in sprint 2 focused on three important part of the project: building event registration, payment processing, and ticket generation features.
+## Objectives
+Beckend part in this sprint focused on three important part of the project: building event registration, payment processing, and ticket generation features.
 
 ---
 
-## Completed Tasks
+## Successfully Completed Tasks
 
 ### 1. Event Registration API
 
 *Endpoint:* POST /api/events/:eventId/register
 
-*What it does:*
-- Verifies user is logged in (checks JWT token)
-- Checks if event has available seats
-- Creates registration record in database
-- Decreases available_seats by 1
-- Returns registration ID and confirmation
+*Here is what it does:*
+- Checks if the user is logged in (via JWT token)
+- Confirms the event still has empty seats
+- Creates a new registration in the database
+- Decrement the event’s available seats by 1
+- Returns the registration ID and a confirmation message
 
 *Request Body:*
 json
@@ -294,6 +294,4 @@ Sprint 2 backend is *100% complete and working!*
 
 ---
 
-*Prepared by:* Fariba Mohammadi (Backend Lead Developer)  
-*Date:* November 26, 2025  
-*Status:* Sprint 2 Complete
+*Sprint 2 Complete Date:* November 26, 2025  
