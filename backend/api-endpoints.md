@@ -62,7 +62,7 @@ json
   ]
 }
 
-```
+---
 
 ## Sprint 2 - New Endpoints
 
