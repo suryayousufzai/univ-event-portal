@@ -2,7 +2,7 @@
 ### **Date:** November 26, 2025  
 ### **Project:** University Event Registration Portal  
 ### **Meeting Type:** Daily Scrum + Sprint Review (Sprint 2 Final Day)  
-### **Duration:** ~35 minutes  
+### **Duration:** ~22 minutes  
 ### **Platform:** Zoom
 
 ---
