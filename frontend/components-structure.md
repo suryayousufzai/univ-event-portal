@@ -310,3 +310,223 @@ Each component should be tested for:
 *Prepared by:* Muneera Aman (Frontend Lead Developer)  
 *Last Updated:* November 22, 2025
 
+
+## Sprint 2 - Components
+
+### Page Components
+#### EventDetailsPage.jsx
+*Purpose:* Display full information about a single event  cardholder
+*Location:* src/pages/EventDetailsPage.jsx
+
+*Props:*
+- None (gets eventId from URL params)
+
+*State:*
+- event (object) - Event details from API
+- loading (boolean)
+- error (string)
+- showModal (boolean) - For registration modal
+
+*API Calls:*
+- GET /api/events/:id on mount
+
+*Child Components:*
+- EventDetailCard
+- RegistrationModal
+- LoadingSpinner
+
+---
+
+#### PaymentPage.jsx
+*Purpose:* Payment form for paid event registrations  
+*Location:* src/pages/PaymentPage.jsx
+
+*Props:*
+- None (gets registrationId from URL params)
+
+*State:*
+- cardNumber (string)
+- expiryDate (string)
+- cvv (string)
+- cardholderName (string)
+- loading (boolean)
+- error (string)
+
+*API Calls:*
+- POST /api/payments
+
+*Validation:*
+- Card number: 16 digits
+- Expiry: MM/YY format, not expired
+- CVV: 3 digits
+
+---
+
+#### PaymentSuccessPage.jsx
+*Purpose:* Confirmation page after successful payment  
+*Location:* src/pages/PaymentSuccessPage.jsx
+
+*Features:*
+- Shows success message
+- Displays ticket information
+- Provides download ticket button
+
+---
+
+#### MyEventsPage.jsx
+*Purpose:* Show all user's registered events  
+*Location:* src/pages/MyEventsPage.jsx
+
+*Props:*
+- None (gets userId from auth context)
+
+*State:*
+- registrations (array) - User's registrations
+- loading (boolean)
+- filter (string) - 'all', 'upcoming', 'past'
+
+*API Calls:*
+- GET /api/users/:userId/registrations
+
+*Child Components:*
+- MyEventCard (multiple)
+- LoadingSpinner
+  
+---
+
+### Reusable Components
+
+#### RegistrationModal.jsx
+*Purpose:* Popup to confirm event registration  
+*Location:* src/components/RegistrationModal.jsx
+
+*Props:*
+- isOpen (boolean) - Controls visibility
+- onClose (function) - Called when modal closes
+- onConfirm (function) - Called when user confirms
+- eventName (string) - Event being registered for
+- price (number) - Event price
+
+*Usage:*
+jsx
+<RegistrationModal
+  isOpen={showModal}
+  onClose={() => setShowModal(false)}
+  onConfirm={handleRegister}
+  eventName="Tech Conference 2025"
+  price={50.00}
+/>
+
+---
+
+#### PaymentForm.jsx
+*Purpose:* Credit card input form  
+*Location:* src/components/PaymentForm.jsx
+
+*Props:*
+- onSubmit (function) - Called with payment data
+- amount (number) - Amount to pay
+- loading (boolean) - Shows loading state
+
+*Features:*
+- Card validation
+- Format card number with spaces
+- Detect card type (Visa, Mastercard, etc.)
+
+---
+
+#### MyEventCard.jsx
+*Purpose:* Single event card in My Events list  
+*Location:* src/components/MyEventCard.jsx
+
+*Props:*
+- registration (object) - Registration details
+- onCancel (function) - Called when cancel clicked
+- onDownload (function) - Called when download clicked
+
+*Features:*
+- Shows event details
+- Status badge (confirmed, pending, cancelled)
+- Action buttons
+
+---
+
+#### Ticket.jsx
+*Purpose:* Ticket display component  
+*Location:* src/components/Ticket.jsx
+
+*Props:*
+- ticket (object) - Ticket information
+  - ticketCode
+  - eventName
+  - eventDate
+  - userName
+  - location
+
+*Features:*
+- Ticket-style design
+- Downloadable
+- Printable format
+
+---
+
+#### StatusBadge.jsx
+*Purpose:* Show registration status with color  
+*Location:* src/components/StatusBadge.jsx
+
+*Props:*
+- status (string) - 'confirmed', 'pending', 'cancelled'
+
+*Renders:*
+- Green badge for confirmed
+- Yellow badge for pending
+- Red badge for cancelled
+
+---
+
+#### LoadingSpinner.jsx
+*Purpose:* Loading animation  
+*Location:* src/components/LoadingSpinner.jsx
+
+*Props:*
+- size (string) - 'small', 'medium', 'large'
+- message (string) - Optional loading text
+
+*Usage:*
+jsx
+<LoadingSpinner size="large" message="Processing payment..." />
+
+---
+
+## Component Hierarchy - Sprint 2
+
+App
+├── EventDetailsPage
+│   ├── EventDetailCard
+│   ├── RegistrationModal
+│   └── LoadingSpinner
+├── PaymentPage
+│   ├── PaymentForm
+│   ├── PaymentSummary
+│   └── LoadingSpinner
+├── PaymentSuccessPage
+│   └── Ticket
+└── MyEventsPage
+    ├── MyEventCard (x multiple)
+    ├── StatusBadge
+    └── LoadingSpinner
+
+---
+
+## Styling Notes
+
+All Sprint 2 components use:
+- Tailwind CSS utility classes
+- Consistent color scheme
+- Responsive design
+- Smooth animations
+- Hover effects
+
+---
+
+*Updated:* November 26, 2025 - Sprint 2
