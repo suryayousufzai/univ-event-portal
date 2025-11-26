@@ -1,71 +1,70 @@
 # Backend Implementation Summary - Sprint 2
 
 **Developer:** Fariba Mohammadi (Backend Lead)  
-**Sprint 2:** Nov (23-26) 2025 
+**Sprint 2:** Nov 23-26, 2025 
 
 ---
 
-## Objectives
-Beckend part in this sprint focused on three important part of the project: building event registration, payment processing, and ticket generation features.
+## What We Set Out to Do
+This sprint, I focused on building the core backend functionality that lets students register for events, pay for tickets, and receive their confirmations. These were the most critical features we needed to get the platform working.
 
 ---
 
-## Successfully Completed Tasks
+## What I Built
 
-### 1. Event Registration API
+### 1. Event Registration System
+I created an API endpoint that handles the entire registration process when someone signs up for an event.
 
-*Endpoint:* POST /api/events/:eventId/register
+- **Endpoint:** `POST /api/events/:eventId/register`
+- **How it works:**
+  - First, it verifies the user is authenticated
+  - Then checks if there are still seats available for the event
+  - Creates a new registration entry in the database
+  - Reduces the available seat count by one
+  - Sends back a confirmation with a unique ticket code
 
-*Here is what it does:*
-- Checks if the user is logged in (via JWT token)
-- Confirms the event still has empty seats
-- Creates a new registration in the database
-- Decrement the event’s available seats by 1
-- Returns the registration ID and a confirmation message
-
-*Request Body:*
-json
+**Request Example:**
+```json
 {
   "userId": 6,
   "eventId": 3
 }
+```
 
-
-*Success Response:*
-json
+**When it works:**
+```json
 {
   "success": true,
   "message": "Registration successful",
   "registrationId": 12,
   "ticketCode": "TICKET-ABC123"
 }
+```
 
+**Common errors handled:**
+- If the event is sold out, users get: "No available seats"
+- If they already registered, they see: "You are already registered for this event"
+- If not logged in: "Please login first"
 
-*Error Responses:*
-- Event full: "No available seats"
-- Already registered: "You are already registered for this event"
-- Not logged in: "Please login first"
-
-*Database Changes:*
-- Inserts into registrations table
-- Updates available_seats in events table
+**Behind the scenes:**
+The system adds a record to the registrations table and updates the available_seats count in the events table.
 
 ---
 
-### 2. Payment Processing API
+### 2. Payment Processing System
 
-*Endpoint:* POST /api/payments
+**Endpoint:** `POST /api/payments`
 
-*What it does:*
-- Accepts payment information (card details)
-- Validates card format
-- Processes payment through sandbox (simulated)
-- Updates registration status to "paid"
-- Creates payment record
-- Returns transaction confirmation
+**What happens here:**
+- The system receives payment details from the user
+- Validates that the card number format is correct
+- Sends the payment through our sandbox gateway (no real charges yet!)
+- Updates the registration to show it's been paid
+- Saves the payment record for our records
+- Returns a transaction confirmation
 
-*Request Body:*
-json
+**What to send:**
+```json
 {
   "registrationId": 12,
   "amount": 50.00,
@@ -74,10 +73,10 @@ json
   "cvv": "123",
   "cardholderName": "John Doe"
 }
+```
 
-
-*Success Response:*
-json
+**Successful payment:**
+```json
 {
   "success": true,
   "message": "Payment successful",
@@ -85,34 +84,34 @@ json
   "amount": 50.00,
   "paymentDate": "2025-11-25T14:30:00Z"
 }
+```
 
+**Error handling:**
+- Bad card number: "Invalid card number"
+- Card expired: "Card has expired"
+- Gateway rejection: "Payment declined by gateway"
 
-*Error Responses:*
-- Invalid card: "Invalid card number"
-- Expired card: "Card has expired"
-- Payment declined: "Payment declined by gateway"
+**What gets saved:**
+- The registration status changes to "paid" in the database
+- A new payment record is created with all the transaction details
 
-*Database Changes:*
-- Updates registrations table: status = "paid"
-- Inserts into payments table
-
-*Note:* Using sandbox payment gateway - no real money processed!
+**Important note:** We're using a sandbox environment right now, so no actual money changes hands during testing.
 
 ---
 
-### 3. Ticket Generation API 
+### 3. Digital Ticket Generation 
 
-*Endpoint:* GET /api/tickets/:registrationId
+**Endpoint:** `GET /api/tickets/:registrationId`
 
-*What it does:*
-- Generates unique ticket code
-- Retrieves event and user information
-- Creates ticket details
-- Simulates email sending
-- Returns downloadable ticket data
+**This endpoint:**
+- Creates a unique ticket code for each registration
+- Pulls together all the event and user information
+- Packages everything into a ticket format
+- Simulates sending a confirmation email
+- Returns the ticket data that can be downloaded
 
-*Success Response:*
-json
+**What you get back:**
+```json
 {
   "success": true,
   "ticket": {
@@ -127,25 +126,25 @@ json
     "status": "confirmed"
   }
 }
+```
 
-
-*Email Simulation:*
-- For this sprint, emails are logged to console
-- In production, would use SendGrid or similar service
+**About email notifications:**
+- Right now, emails are just logged to the console so we can see them
+- For production, I'll integrate a real email service like SendGrid
 
 ---
 
-### 4. Get User Registrations API
+### 4. User Registration History
 
-*Endpoint:* GET /api/users/:userId/registrations
+**Endpoint:** `GET /api/users/:userId/registrations`
 
-*What it does:*
-- Returns all events a user has registered for
-- Includes event details and registration status
-- Used for "My Events" page
+**Purpose:**
+- Shows students all the events they've signed up for
+- Includes full event details and current registration status
+- Powers the "My Events" dashboard page
 
-*Success Response:*
-json
+**Response:**
+```json
 {
   "success": true,
   "registrations": [
@@ -161,137 +160,138 @@ json
     }
   ]
 }
-
+```
 
 ---
 
-### 5. Cancel Registration API (Bonus!)
+### 5. Registration Cancellation (Extra Feature!)
 
-*Endpoint:* DELETE /api/registrations/:registrationId
+**Endpoint:** `DELETE /api/registrations/:registrationId`
 
-*What it does:*
-- Marks registration as cancelled
-- Increases available_seats by 1
-- Processes refund (if paid)
-- Sends cancellation email (simulated)
+**What it does:**
+- Changes the registration status to cancelled
+- Frees up the seat by adding one back to available_seats
+- Initiates a refund if payment was already made
+- Triggers a cancellation confirmation email (simulated for now)
 
-*Success Response:*
-json
+**Response:**
+```json
 {
   "success": true,
   "message": "Registration cancelled successfully",
   "refundAmount": 50.00
 }
-
-
----
-
-## Database Updates
-
-### Modified Tables:
-
-*registrations table:*
-- Added status field: 'pending', 'paid', 'cancelled'
-- Added ticket_code field (unique)
-
-*payments table:*
-- All fields working correctly
-- Stores transaction_id, amount, status
-
-*events table:*
-- available_seats updated correctly when users register/cancel
+```
 
 ---
 
-## Security Features
+## Database Changes I Made
 
- - JWT token verification on all protected endpoints
- - Password hashing with bcrypt
- - Input validation on all APIs
- - SQL injection prevention (prepared statements)
- - No sensitive card data stored in database
- - Error messages don't expose system details  
+### Tables I Updated:
 
----
+**registrations table:**
+- Added a status column that tracks: 'pending', 'paid', or 'cancelled'
+- Added ticket_code field to store unique codes (must be unique)
 
-## Testing
+**payments table:**
+- Everything is working as expected
+- Captures transaction_id, amount, and payment status
 
-*All APIs tested in Postman:*
-- Registration with available seats - PASSED
-- Registration when event full - PASSED (shows error)
-- Payment with valid card - PASSED
-- Payment with invalid card - PASSED (shows error)
-- Ticket generation - PASSED
-- View user registrations - PASSED
-- Cancel registration - PASSED
-
-*QA Testing:* Gita tested all APIs - 100% pass rate!
+**events table:**
+- The available_seats field now updates properly when people register or cancel
 
 ---
 
-## Challenges Faced
+## Security Measures Implemented
 
-*Challenge 1:* Payment Gateway Integration
-- *Solution:* Used sandbox mode for testing, simulated responses
-
-*Challenge 2:* Ensuring seat availability updates correctly
-- *Solution:* Used database transactions to prevent race conditions
-
-*Challenge 3:* Generating unique ticket codes
-- *Solution:* Used combination of timestamp + random string
+- Every protected route verifies JWT tokens before allowing access
+- User passwords are hashed using bcrypt (never stored in plain text)
+- All incoming data is validated before processing
+- Using prepared statements to prevent SQL injection attacks
+- Credit card numbers are never saved to our database
+- Error messages are generic and don't leak system information
 
 ---
 
-## Code Quality
+## Testing Results
 
-- Clean, modular code structure
-- Proper error handling everywhere
-- Detailed code comments
--  API documentation complete
--   Follows REST API best practices  
+**I tested everything in Postman:**
+- Registering when seats are available ✓ Works perfectly
+- Trying to register for a full event ✓ Shows proper error
+- Processing a payment with valid card ✓ Goes through
+- Attempting payment with invalid card ✓ Catches the error
+- Generating tickets ✓ Creates correctly
+- Viewing user's registrations ✓ Displays all events
+- Cancelling a registration ✓ Processes successfully
 
----
-
-## Performance
-
-All APIs respond in < 500ms average  
-Database queries optimized with indexes  
-No performance issues found  
+**QA Review:** Gita went through all the APIs and everything passed her tests!
 
 ---
 
-## What's Ready for Sprint 3
+## Problems I Ran Into
 
-- User registration system fully functional
-- Payment processing working
-- Ticket generation working
-- Foundation ready for admin features
-- Database structure supports future features
+**Issue #1: Getting the payment gateway to work**
+- How I solved it: Set up a sandbox environment for testing and simulated the gateway responses
 
----
+**Issue #2: Making sure seat counts stay accurate**
+- How I solved it: Implemented database transactions so multiple people can't book the same last seat
 
-## Future Enhancements (Not in Sprint 2)
-
-- Real email sending (currently simulated)
-- PDF ticket generation
-- QR code on tickets
-- Refund processing automation
-- Waitlist for full events
+**Issue #3: Creating unique ticket codes**
+- How I solved it: Combined the current timestamp with a random string to guarantee uniqueness
 
 ---
 
-## Summary
+## Code Standards
 
-Sprint 2 backend is *100% complete and working!*
-
-- 4 main APIs delivered
-- All acceptance criteria met
-- Thoroughly tested
-- Production-ready quality
--  Ready for Sprint 3 features  
-
-*Backend Status:* EXCELLENT 
+- Organized the code into clean, modular functions
+- Added comprehensive error handling throughout
+- Wrote detailed comments explaining the logic
+- Documented every API endpoint thoroughly
+- Following REST API conventions and best practices
 
 ---
 
-*Sprint 2 Complete Date:* November 26, 2025  
+## Performance Metrics
+
+- All endpoints respond in under 500 milliseconds on average
+- Added database indexes to speed up common queries
+- Haven't encountered any performance bottlenecks
+
+---
+
+## Ready for Next Sprint
+
+- The complete user registration flow is up and running
+- Payment system is functional and tested
+- Ticket generation works smoothly
+- Database structure supports the admin features coming in Sprint 3
+- Everything's in place to build on top of this foundation
+
+---
+
+## Ideas for Later (Not Part of Sprint 2)
+
+- Hook up a real email service instead of just logging
+- Generate actual PDF tickets that users can download
+- Add QR codes to tickets for easy scanning
+- Automate the refund process completely
+- Create a waitlist system for sold-out events
+
+---
+
+## Sprint Wrap-Up
+
+Sprint 2 backend work is **completely finished and fully functional!**
+
+- Delivered all 4 main API endpoints
+- Met every requirement we set out to achieve
+- Tested thoroughly and fixed all bugs
+- Code quality is production-ready
+- Backend is solid for Sprint 3 development
+
+**Overall Backend Health:** Excellent
+
+---
+
+**Sprint Completion Date:** November 26, 2025
+```
