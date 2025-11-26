@@ -3,7 +3,7 @@
 **Developer:** Fariba Mohammadi (Backend Lead)  
 **Database:** MySQL  
 **Sprints Included:** Sprint 1 + Sprint 2  
-**Updated:** November 22, 2025
+**Updated:** November 26, 2025
 
 ---
 
