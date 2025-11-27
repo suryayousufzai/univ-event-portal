@@ -96,6 +96,10 @@ Everyone confirmed no blockers.
 - None reported.
 
 ---
+## Recording 
+- https://drive.google.com/file/d/1xwydt48rh3xHuoG52rZ7GTf3k9X8onrh/view?usp=drive_link
+
+---
 
 ## Next Steps
 - Fariba & Muneera to finish login/dashboard today  
