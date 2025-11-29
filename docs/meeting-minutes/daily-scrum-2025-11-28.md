@@ -3,7 +3,7 @@
 **Sprint:** Sprint 3 (Day 2 of 4)  
 **Date:** November 28, 2025  
 **Time:** 10:00 AM  
-**Duration:**  minutes  
+**Duration:**  4 minutes  
 **Location:** Zoom
 
 ---
