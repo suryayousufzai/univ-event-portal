@@ -3,7 +3,7 @@
 **Sprint:** Sprint 3 (Day 3 of 4)  
 **Date:** Friday, November 29, 2025  
 **Time:** 10:00 AM  
-**Duration:** 15 minutes  
+**Duration:** 6 minutes  
 **Location:** Google Meet
 
 ---
