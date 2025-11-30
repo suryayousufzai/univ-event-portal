@@ -21,7 +21,7 @@
 - [Sprint Planning - Nov 15](https://drive.google.com/file/d/1Yn_7Hgd3VIrc44z7N1HVpHQUrDeK38Oe/view)
 - [Sprint Review and Sprint Retrospective - Nov 22](https://drive.google.com/file/d/1KX4PdCD0QyxyoedgOEEhrkSjvRiNrg-t/view?usp=drive_link) 
 - [Sprint Review - Nov 26](https://drive.google.com/file/d/1jHHztM747nIlm63vBfpxQXr20hQmwg6K/view?usp=drive_link)
-- [Sprint Review and Sprint Retrospective - Nov 30]()
+- [Sprint Review and Sprint Retrospective - Nov 30](https://drive.google.com/file/d/1gx7cd6OuI-Kg1QTXH0Z8aknuLXpimYFv/view?usp=drive_link)
 - 
 ```
 
