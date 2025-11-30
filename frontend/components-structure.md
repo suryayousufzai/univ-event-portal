@@ -530,3 +530,606 @@ All Sprint 2 components use:
 ---
 
 *Updated:* November 26, 2025 - Sprint 2
+
+# Frontend Components Structure - Sprint 3
+
+*Project:* University Event Registration Portal  
+*Developer:* Muneera Aman (Frontend Lead)  
+*Sprint:* Sprint 3  
+*Date:* November 30, 2025
+
+---
+
+## Overview
+This document describes the admin panel components added in Sprint 3. All these components are admin-only and require admin authentication to access.
+
+---
+
+## Sprint 3 - Admin Components
+
+### Page Components
+
+#### AdminDashboard.jsx
+*Purpose:* Main admin dashboard with statistics and quick actions  
+*Location:* src/pages/admin/AdminDashboard.jsx
+
+*Props:*
+- None (gets data from API)
+
+*State:*
+- totalEvents (number)
+- totalRegistrations (number)
+- activeEvents (number)
+- loading (boolean)
+
+*API Calls:*
+- GET /api/admin/dashboard on mount
+
+*Features:*
+- Three stat cards showing counts
+- Two action cards (Create Event, Manage Events)
+- Real-time data updates
+- Responsive grid layout
+
+*Usage:*
+jsx
+<AdminDashboard />
+
+---
+
+#### CreateEventPage.jsx
+*Purpose:* Form to create new events  
+*Location:* src/pages/admin/CreateEventPage.jsx
+
+*Props:*
+- None
+
+*State:*
+- title (string)
+- description (string)
+- category (string)
+- icon (string)
+- date (string)
+- time (string)
+- location (string)
+- capacity (number)
+- price (number)
+- error (string)
+- loading (boolean)
+
+*API Calls:*
+- POST /api/admin/events
+
+*Validation:*
+- All required fields must be filled
+- Date must be in future
+- Capacity must be positive number
+- Price cannot be negative
+
+*Form Layout:*
+- Two-column grid for date/time and capacity/price
+- Single column for title, description, location
+- Dropdowns for category and icon
+
+---
+
+#### ManageEventsPage.jsx
+*Purpose:* Table view of all events with admin actions  
+*Location:* src/pages/admin/ManageEventsPage.jsx
+
+*Props:*
+- None
+
+*State:*
+- events (array)
+- loading (boolean)
+- showEditModal (boolean)
+- showDeleteModal (boolean)
+- selectedEvent (object)
+
+*API Calls:*
+- GET /api/admin/events on mount
+- PUT /api/admin/events/:id for edit
+- DELETE /api/admin/events/:id for delete
+
+*Child Components:*
+- EventsTable
+- EditEventModal
+- DeleteConfirmModal
+- LoadingSpinner
+
+*Features:*
+- Search and filter (planned for future)
+- Action buttons per row
+- Empty state when no events
+
+---
+
+#### ViewAttendeesPage.jsx
+*Purpose:* Show all registrations for a specific event  
+*Location:* src/pages/admin/ViewAttendeesPage.jsx
+
+*Props:*
+- None (gets eventId from URL params)
+
+*State:*
+- event (object)
+- attendees (array)
+- loading (boolean)
+
+*API Calls:*
+- GET /api/admin/events/:id/attendees on mount
+- GET /api/admin/events/:id/attendees/export for CSV
+
+*Child Components:*
+- AttendeesTable
+- ExportButton
+- LoadingSpinner
+
+*Features:*
+- Display attendee details in table
+- Color-coded payment status
+- CSV export button
+- Shows empty state if no attendees
+- Back button to Manage Events
+
+---
+
+### Reusable Components
+
+#### StatCard.jsx
+*Purpose:* Display single statistic on dashboard  
+*Location:* src/components/admin/StatCard.jsx
+
+*Props:*
+- label (string) - Stat description
+- value (number) - Stat number
+- icon (string) - Optional emoji or icon
+
+*Usage:*
+jsx
+<StatCard 
+  label="Total Events" 
+  value={6} 
+  icon="📅"
+/>
+
+*Styling:*
+- Purple gradient background
+- Large number (3rem font)
+- White text
+- Rounded corners with shadow
+
+---
+
+#### ActionCard.jsx
+*Purpose:* Clickable card for admin actions  
+*Location:* src/components/admin/ActionCard.jsx
+
+*Props:*
+- title (string) - Card title
+- icon (string) - Emoji icon
+- onClick (function) - Click handler
+
+*Features:*
+- Hover effect (lifts up, changes border)
+- Centered text and icon
+- Responsive sizing
+
+*Usage:*
+jsx
+<ActionCard 
+  title="Create Event" 
+  icon="➕"
+  onClick={() => navigate('/admin/create')}
+/>
+
+---
+
+#### EventsTable.jsx
+*Purpose:* Table displaying all events with actions  
+*Location:* src/components/admin/EventsTable.jsx
+
+*Props:*
+- events (array) - Events to display
+- onEdit (function) - Called with eventId
+- onDelete (function) - Called with eventId
+- onViewAttendees (function) - Called with eventId
+
+*Features:*
+- Responsive table layout
+- Scrolls horizontally on mobile
+- Action buttons per row
+- Shows capacity and availability
+- Price formatting (Free or $X.XX)
+
+*Columns:*
+- Title
+- Date
+- Location
+- Capacity
+- Available
+- Price
+- Actions (3 buttons)
+
+---
+
+#### AttendeesTable.jsx
+*Purpose:* Table showing event registrations  
+*Location:* src/components/admin/AttendeesTable.jsx
+
+*Props:*
+- attendees (array) - Registration records
+- eventTitle (string) - Event name
+
+*Features:*
+- Color-coded payment status
+- Monospace font for ticket codes
+- Formatted registration dates
+
+*Columns:*
+- Name
+- Email
+- Registration Date
+- Payment Status
+- Ticket Code
+
+---
+
+#### EditEventModal.jsx
+*Purpose:* Popup modal to edit existing event  
+*Location:* src/components/admin/EditEventModal.jsx
+
+*Props:*
+- isOpen (boolean) - Controls visibility
+- event (object) - Current event data
+- onClose (function) - Close handler
+- onSave (function) - Save handler with updated data
+
+*State:*
+- All event fields (same as CreateEventPage)
+- loading (boolean)
+- error (string)
+
+*Features:*
+- Pre-fills form with current data
+- Same validation as create
+- Close button in header
+- Save and Cancel buttons in footer
+
+*Usage:*
+jsx
+<EditEventModal
+  isOpen={showModal}
+  event={selectedEvent}
+  onClose={() => setShowModal(false)}
+  onSave={handleUpdate}
+/>
+
+---
+
+#### DeleteConfirmModal.jsx
+*Purpose:* Confirmation dialog before deleting event  
+*Location:* src/components/admin/DeleteConfirmModal.jsx
+
+*Props:*
+- isOpen (boolean)
+- eventTitle (string)
+- onConfirm (function) - Called when user confirms
+- onCancel (function) - Called when user cancels
+
+*Features:*
+- Warning icon
+- Clear warning message about cascade delete
+- Red delete button
+- Gray cancel button
+
+*Usage:*
+jsx
+<DeleteConfirmModal
+  isOpen={showDeleteModal}
+  eventTitle="AI Workshop"
+  onConfirm={handleDelete}
+  onCancel={() => setShowDeleteModal(false)}
+/>
+
+---
+
+#### ExportButton.jsx
+*Purpose:* Button to export attendees to CSV  
+*Location:* src/components/admin/ExportButton.jsx
+
+*Props:*
+- eventId (number)
+- eventTitle (string)
+- disabled (boolean) - Disabled if no attendees
+
+*Features:*
+- Downloads CSV file
+- Shows loading state during export
+- Green success color
+
+*API Call:*
+javascript
+GET /api/admin/events/:eventId/attendees/export
+
+---
+
+#### EmptyState.jsx
+*Purpose:* Message shown when no data to display  
+*Location:* src/components/admin/EmptyState.jsx
+
+*Props:*
+- icon (string) - Emoji icon
+- title (string) - Main message
+- message (string) - Detailed message
+- actionButton (component) - Optional button to show
+
+*Usage:*
+jsx
+<EmptyState
+  icon="📅"
+  title="No Events Yet"
+  message="Create your first event to get started."
+  actionButton={<Button text="Create Event" onClick={handleCreate} />}
+/>
+
+---
+
+#### AdminHeader.jsx
+*Purpose:* Page header for admin pages  
+*Location:* src/components/admin/AdminHeader.jsx
+
+*Props:*
+- title (string) - Page title
+- actions (component) - Optional action buttons
+
+*Features:*
+- Purple bottom border
+- Flex layout for title and actions
+- Consistent spacing
+
+*Usage:*
+jsx
+<AdminHeader
+  title="Manage Events"
+  actions={
+    <>
+      <Button text="Create Event" onClick={handleCreate} />
+      <Button text="Dashboard" onClick={goToDashboard} />
+    </>
+  }
+/>
+
+---
+
+## Component Hierarchy - Sprint 3
+
+App
+├── AdminDashboard
+│   ├── StatCard (x3)
+│   ├── ActionCard (x2)
+│   └── LoadingSpinner
+├── CreateEventPage
+│   ├── AdminHeader
+│   └── EventForm (new)
+├── ManageEventsPage
+│   ├── AdminHeader
+│   ├── EventsTable
+│   ├── EditEventModal
+│   ├── DeleteConfirmModal
+│   └── EmptyState
+└── ViewAttendeesPage
+    ├── AdminHeader
+    ├── AttendeesTable
+    ├── ExportButton
+    ├── EmptyState
+    └── LoadingSpinner
+
+---
+
+## Routing Updates
+
+Added admin routes:
+javascript
+<Routes>
+  {/* Previous routes */}
+  
+  {/* Admin routes - protected */}
+  <Route path="/admin" element={<AdminLayout />}>
+    <Route path="dashboard" element={<AdminDashboard />} />
+    <Route path="create" element={<CreateEventPage />} />
+    <Route path="manage" element={<ManageEventsPage />} />
+    <Route path="attendees/:eventId" element={<ViewAttendeesPage />} />
+  </Route>
+</Routes>
+
+---
+
+## Protected Routes
+
+Created ProtectedRoute component to check admin role:
+jsx
+<ProtectedRoute requireAdmin={true}>
+  <AdminDashboard />
+</ProtectedRoute>
+
+If user is not admin, redirect to home page.
+
+---
+
+## New Utility Functions
+
+#### dateFormatter.js
+*Purpose:* Convert dates between formats
+
+*Functions:*
+- formatDate(dateStr) - "2025-12-15" to "December 15, 2025"
+- formatTime(timeStr) - "14:00" to "2:00 PM"
+- reverseFormatDate(dateStr) - "December 15, 2025" to "2025-12-15"
+- reverseFormatTime(timeStr) - "2:00 PM" to "14:00"
+
+Used in edit modal to convert dates for input fields.
+
+---
+
+#### csvExport.js
+*Purpose:* Generate and download CSV files
+
+*Functions:*
+- exportToCSV(data, filename) - Creates CSV and triggers download
+
+Used by ExportButton component.
+
+---
+
+## State Management Updates
+
+Added admin context:
+javascript
+const AdminContext = createContext();
+
+Provides:
+- isAdmin (boolean)
+- adminData (object)
+- checkAdminAccess (function)
+
+Used by all admin components to verify access.
+
+---
+
+## Styling Approach
+
+Admin components use:
+- Tailwind CSS utility classes
+- Consistent purple theme (#667eea, #764ba2)
+- Card-based layouts
+- Hover effects on interactive elements
+- Responsive tables with horizontal scroll
+- Modal overlays with dark background
+
+New classes:
+- .admin-table - Table styling
+- .admin-card - Card container
+- .stat-value - Large statistic numbers
+- .action-btn - Button groups in tables
+
+---
+
+## Form Validation
+
+All admin forms validate:
+- Required fields not empty
+- Date is in future
+- Capacity is positive
+- Price is non-negative
+- Email format (for notifications in future)
+
+Validation happens:
+1. On blur (when user leaves field)
+2. On submit (before API call)
+
+Shows error messages under each field.
+
+---
+
+## API Integration
+
+All admin API calls include:
+- Authorization header with JWT token
+- Error handling for 401 (unauthorized) and 403 (forbidden)
+- Loading states during requests
+- Success messages after mutations
+
+Example:
+javascript
+const response = await fetch('/api/admin/events', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`
+  },
+  body: JSON.stringify(eventData)
+});
+
+---
+
+## Error Handling
+
+Admin components handle:
+- Network errors
+- Validation errors
+- Permission errors (401/403)
+- Not found errors (404)
+
+Shows user-friendly messages:
+- "Connection error. Please try again."
+- "You don't have permission to access this page."
+- "Event not found."
+
+---
+
+## Performance Considerations
+
+For large event lists:
+- Table pagination (planned for future)
+- Search debouncing (planned for future)
+- Lazy loading of attendee data
+
+Currently handles up to 100 events smoothly.
+
+---
+
+## Testing
+
+Each admin component tested for:
+- Renders with correct data
+- Form validation works
+- API calls made correctly
+- Error messages display
+- Modal open/close works
+- CSV export downloads file
+- Responsive on mobile
+
+---
+
+## Challenges Faced
+
+1. Modal centering on all screen sizes - solved with flexbox
+2. Date format conversion for edit - created helper functions
+3. Table responsive on mobile - added horizontal scroll
+4. CSV special characters - wrapped values in quotes
+
+---
+
+## Time Spent
+
+- AdminDashboard: 2 hours
+- CreateEventPage: 2 hours
+- ManageEventsPage: 2 hours
+- ViewAttendeesPage: 1.5 hours
+- Modals: 1.5 hours
+- Styling and polish: 2 hours
+- Bug fixes: 1 hour
+- Testing: 1.5 hours
+
+Total: 14 hours
+
+---
+
+## Future Improvements
+
+If we had more time:
+- Add search and filters on Manage Events
+- Pagination for large event lists
+- Drag and drop event images
+- Rich text editor for description
+- Bulk actions (delete multiple)
+- Export events to CSV
+- Analytics charts on dashboard
+- Event duplication feature
+
+---
+
+*Prepared by:* Muneera Aman (Frontend Lead Developer)  
+*Last Updated:* November 30, 2025
