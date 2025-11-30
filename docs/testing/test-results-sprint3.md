@@ -2,8 +2,11 @@
 # Test Results - Sprint 3
 
 **Tested by:** Gita Rahmany (QA Engineer)
+
 **Sprint:** Sprint 3 (November 27–30, 2025)
+
 **Test Period:** November 28–30, 2025
+
 **Report Date:** November 30, 2025
 
 ---
