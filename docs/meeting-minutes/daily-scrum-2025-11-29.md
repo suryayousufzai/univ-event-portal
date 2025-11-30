@@ -1,7 +1,7 @@
 # Daily Scrum Meeting - November 29, 2025
 
 **Sprint:** Sprint 3 (Day 3 of 4)  
-**Date:** Friday, November 29, 2025  
+**Date:** November 29, 2025  
 **Time:** 10:00 AM  
 **Duration:** 6 minutes  
 **Location:** Google Meet
