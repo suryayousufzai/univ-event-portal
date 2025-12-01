@@ -7,7 +7,7 @@
 
 ---
 
-## Overview
+## Objectives
 
 In Sprint 3, I implemented the backend functionality for the admin panel. This included creating APIs for event management (create, edit, delete) and viewing attendee information. Since we're using localStorage as our database, I simulated what would normally be server-side operations on the client side.
 
