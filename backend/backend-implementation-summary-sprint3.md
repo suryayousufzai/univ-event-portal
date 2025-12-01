@@ -1,9 +1,8 @@
 # Backend Implementation Summary - Sprint 3
 
 **Project:** University Event Registration Portal  
-**Sprint:** Sprint 3  
-**Team Member:** Fariba (Backend Lead)  
-**Date:** November 27-30, 2025
+**Developer:** Fariba (Backend Lead)  
+**Sprint 3 Date:** November 27-30, 2025
 
 ---
 
