@@ -407,6 +407,10 @@ Excellent work, team. The portal is ready for pilot testing.
 
 
   
-**Prepared by:** Surya Yousufzai 
-**Sprint 4 Status:** Complete and Accepted  
+✅ **Document Prepared by:** Surya Yousufzai (Scrum Master)  
+
+✅ **Reviewed by:** Marwa Paiman (Product Owner)
+
+**Sprint 4 Status:** Complete and Accepted
+
 **Project Status:** MVP Complete, Ready for Pilot
