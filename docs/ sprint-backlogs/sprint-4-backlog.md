@@ -19,11 +19,13 @@ This sprint is about polish and usability improvements rather than building comp
 
 | ID | User Story | Story Points | Status | Assigned To |
 |----|------------|--------------|--------|-------------|
-| US-014 | Export Attendee Lists (Enhanced) | 5 | Not Started | Fariba + Muneera + Gita |
+| ENHANCE-001 | Export Enhancements (PDF + Improved CSV) | 5 | Not Started | Fariba + Muneera + Gita |
 | US-015 | Basic Reports Dashboard | 5 | Not Started | Fariba + Muneera + Gita |
 | US-016 | Automated Email Notifications | 5 | Not Started | Fariba + Muneera + Gita |
 
 **Total Story Points:** 15
+
+**Note:** ENHANCE-001 is an enhancement to US-014 (View Attendees) which was completed in Sprint 3. We're adding PDF export capability and improving the CSV format.
 
 ---
 
@@ -31,10 +33,10 @@ This sprint is about polish and usability improvements rather than building comp
 
 ---
 
-### US-014: Export Attendee Lists - Enhanced (5 points)
+### ENHANCE-001: Export Enhancements - PDF & Improved CSV (5 points)
 
 **What it does:**
-In Sprint 3, we built the view attendees page with basic CSV export. Now we're adding PDF export and improving the CSV format to make it more professional.
+In Sprint 3, we built the view attendees page with basic CSV export. Now we're adding PDF export and improving the CSV format to make it more professional. This is an enhancement to US-014 that was completed in Sprint 3.
 
 **Acceptance Criteria:**
 - Admins can export attendee lists as CSV (already exists, we're improving it)
@@ -289,7 +291,7 @@ This is a very tight 2-day sprint, so we need to be efficient.
 ## Success Criteria
 
 Sprint 4 is successful if:
-- ✅ Admins can export attendees as both CSV and PDF
+- ✅ Admins can export attendees as both CSV and PDF (enhancement complete)
 - ✅ Reports page shows accurate statistics
 - ✅ Users receive email after registration
 - ✅ Users receive email after payment
