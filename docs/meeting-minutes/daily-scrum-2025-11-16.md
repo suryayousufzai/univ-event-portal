@@ -5,7 +5,7 @@
 **meeting type:** daily scrum  
 **duration:** 7 mins  
 **time:** 10:00 am  
-**platform:** google meet  
+**platform:** zoom 
 
 ---
 
