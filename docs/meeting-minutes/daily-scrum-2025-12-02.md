@@ -1,8 +1,11 @@
 # 🧑‍💻 Daily Scrum Meeting – Sprint 4, Day 2
 
 **Project:** University Event Registration Portal
+
 **Meeting Type:** Daily Scrum (Sprint 4 – Day 2)
-**Duration:** ~15 minutes
+
+**Duration:** 8 minutes
+
 **Platform:** Zoom / Recorded
 
 ---
