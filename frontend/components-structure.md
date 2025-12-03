@@ -1133,3 +1133,455 @@ If we had more time:
 
 *Prepared by:* Muneera Aman (Frontend Lead Developer)  
 *Last Updated:* November 30, 2025
+
+---
+
+# Frontend Components Structure - Sprint 4
+
+---
+
+## Overview
+
+Sprint 4 was our shortest sprint - just 2 days. We added three new features to the admin panel: export buttons for PDF, a reports dashboard, and email notification messages.
+
+Most of the work was on the backend. My job was to create the UI and connect it to Fariba's APIs.
+
+---
+
+## Sprint 4 - New Components
+
+### Page Components
+
+#### ReportsPage.jsx
+*Purpose:* Dashboard showing portal statistics  
+*Location:* src/pages/admin/ReportsPage.jsx
+
+*Props:*
+- None (gets data from API)
+
+*State:*
+- totalEvents (number)
+- totalRegistrations (number)
+- totalRevenue (number)
+- activeUsers (number)
+- loading (boolean)
+
+*API Calls:*
+javascript
+GET /api/admin/reports
+
+
+*Features:*
+- Four colorful stat cards
+- Auto-refresh button
+- Loading state while fetching data
+- Responsive grid layout
+
+*Usage:*
+jsx
+<ReportsPage />
+
+
+*Styling:*
+- Purple gradient cards
+- Large numbers (3rem font size)
+- Icons for each stat (📅 📊 💰 👥)
+- Hover effect on refresh button
+
+---
+
+### Reusable Components
+
+#### PDFExportButton.jsx
+*Purpose:* Button to export attendees as PDF  
+*Location:* src/components/admin/PDFExportButton.jsx
+
+*Props:*
+- eventId (number) - Event to export
+- eventTitle (string) - For filename
+- disabled (boolean) - If no attendees
+
+*Features:*
+- Red color to match PDF theme
+- Loading spinner while generating
+- Downloads file automatically
+- Shows success message
+
+*Usage:*
+jsx
+<PDFExportButton 
+  eventId={1} 
+  eventTitle="Tech Conference"
+  disabled={false}
+/>
+
+
+*How it works:*
+javascript
+function handleExport() {
+  setLoading(true);
+  window.location.href = `/api/admin/events/${eventId}/attendees/export-pdf`;
+  setTimeout(() => {
+    setLoading(false);
+    showNotification('PDF exported!');
+  }, 1000);
+}
+
+
+---
+
+#### EmailNotification.jsx
+*Purpose:* Small popup message after registration/payment  
+*Location:* src/components/EmailNotification.jsx
+
+*Props:*
+- message (string) - Notification text
+- type (string) - 'success' | 'error'
+- duration (number) - How long to show (default 5000ms)
+
+*Features:*
+- Slides in from right
+- Auto-dismisses after 5 seconds
+- Green for success, red for error
+- Smooth fade in/out animation
+
+*Usage:*
+jsx
+<EmailNotification 
+  message="Confirmation email sent to your inbox"
+  type="success"
+  duration={5000}
+/>
+
+
+*Styling:*
+css
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #10b981;
+  color: white;
+  padding: 16px 24px;
+  border-radius: 8px;
+  animation: slideIn 0.3s ease;
+}
+
+
+---
+
+### Updated Components
+
+#### ViewAttendeesPage.jsx (Enhanced)
+*What changed:* Added PDF export button next to CSV button
+
+*New features:*
+- Two export buttons side by side
+- CSV button (green)
+- PDF button (red)
+- Both buttons disabled if no attendees
+
+*Code added:*
+jsx
+<div className="export-buttons">
+  <CSVExportButton 
+    eventId={eventId} 
+    eventTitle={event.title}
+  />
+  <PDFExportButton 
+    eventId={eventId} 
+    eventTitle={event.title}
+  />
+</div>
+
+
+---
+
+#### EventRegistrationFlow (Enhanced)
+*What changed:* Added email notification after successful registration
+
+*New features:*
+- Shows notification: "Confirmation email sent to your inbox"
+- Notification appears after registration completes
+- Fades out automatically after 5 seconds
+
+*Code added:*
+javascript
+// After successful registration
+if (response.success) {
+  showNotification('Confirmation email sent to your inbox');
+  navigate('/my-events');
+}
+
+
+---
+
+#### PaymentSuccessPage (Enhanced)
+*What changed:* Added email notification after payment
+
+*New features:*
+- Shows notification: "Receipt sent to your email"
+- Appears on payment success page load
+
+*Code added:*
+javascript
+useEffect(() => {
+  showNotification('Receipt sent to your email');
+}, []);
+
+
+---
+
+## Component Hierarchy - Sprint 4
+
+App
+├── ReportsPage (new)
+│   ├── StatCard (x4)
+│   ├── RefreshButton
+│   └── LoadingSpinner
+├── ViewAttendeesPage (updated)
+│   ├── CSVExportButton
+│   ├── PDFExportButton (new)
+│   └── AttendeesTable
+├── EventRegistrationFlow (updated)
+│   └── EmailNotification (new)
+└── PaymentSuccessPage (updated)
+    └── EmailNotification (new)
+
+---
+
+## Routing Updates
+
+Added reports route:
+javascript
+<Route path="/admin/reports" element={<ReportsPage />} />
+
+
+Updated admin menu to include Reports link.
+
+---
+
+## New Utility Functions
+
+#### formatCurrency.js
+*Purpose:* Format numbers as currency
+
+*Function:*
+javascript
+export function formatCurrency(amount) {
+  return '$' + amount.toFixed(2);
+}
+
+
+*Usage:*
+jsx
+<p>Total Revenue: {formatCurrency(875.50)}</p>
+// Displays: Total Revenue: $875.50
+
+
+---
+
+## Styling Details
+
+### StatCard Styling
+css
+.stat-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px;
+  padding: 24px;
+  color: white;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.stat-number {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+
+### Export Buttons
+css
+.btn-csv {
+  background: #10b981; /* green */
+  color: white;
+  margin-right: 10px;
+}
+
+.btn-pdf {
+  background: #ef4444; /* red */
+  color: white;
+}
+
+
+### Notification Animation
+css
+@keyframes slideIn {
+  from {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+
+---
+
+## API Integration
+
+### Reports Dashboard
+javascript
+useEffect(() => {
+  fetch('/api/admin/reports')
+    .then(response => response.json())
+    .then(data => {
+      setTotalEvents(data.data.totalEvents);
+      setTotalRegistrations(data.data.totalRegistrations);
+      setTotalRevenue(data.data.totalRevenue);
+      setActiveUsers(data.data.activeUsers);
+      setLoading(false);
+    });
+}, []);
+
+
+### PDF Export
+javascript
+function exportPDF() {
+  setLoadingPDF(true);
+  window.location.href = `/api/admin/events/${eventId}/attendees/export-pdf`;
+  setTimeout(() => {
+    setLoadingPDF(false);
+  }, 1000);
+}
+
+
+### Email Notification (Simulated)
+javascript
+// After registration
+await fetch('/api/events/register', { /* ... */ });
+showNotification('Confirmation email sent to your inbox');
+
+// After payment
+await fetch('/api/payments', { /* ... */ });
+showNotification('Receipt sent to your email');
+
+
+---
+
+## Responsive Design
+
+All Sprint 4 components work on mobile:
+
+*Reports Page:*
+- 4 cards on desktop
+- 2 cards per row on tablet
+- 1 card per row on mobile
+
+*Export Buttons:*
+- Side by side on desktop
+- Stack vertically on mobile
+
+*Notifications:*
+- Adjust position on small screens
+- Smaller padding on mobile
+
+---
+
+## State Management
+
+Used React useState for:
+- Loading states (loading, loadingPDF)
+- Data (stats, attendees)
+- Notification visibility (showNotification)
+
+Simple and clean - no need for complex state management for these features.
+
+---
+
+## Error Handling
+
+All components handle:
+- Network errors → Show error message
+- Empty data → Show empty state
+- Loading states → Show spinner
+
+Example:
+javascript
+try {
+  const response = await fetch('/api/admin/reports');
+  if (!response.ok) throw new Error('Failed to load');
+  // ... handle success
+} catch (error) {
+  setError('Failed to load reports. Please try again.');
+}
+
+
+---
+
+## Challenges Faced
+
+1. *PDF Download:* Had to use window.location.href to trigger download
+2. *Notification Timing:* Had to time the notification to appear after API success
+3. *Refresh Button:* Added loading state so user knows data is refreshing
+4. *Export Button Styling:* Made sure CSV and PDF buttons look different but consistent
+
+---
+
+## Time Spent
+
+- Reports page: 3 hours (design + API integration)
+- PDF export button: 1 hour
+- Email notifications: 1 hour
+- Testing and polish: 1 hour
+- Bug fixes: 0.5 hours
+- Responsive design: 1 hour
+
+*Total: 7.5 hours*
+
+Sprint 4 was lighter for frontend since most work was backend.
+
+---
+
+## What I Learned
+
+- How to trigger file downloads in React
+- Managing multiple loading states (CSV + PDF)
+- Creating auto-dismiss notifications
+- Making stat cards that look professional
+- Working with formatted currency
+
+The hardest part was making the notification appear at the right time and position correctly on all screen sizes.
+
+---
+
+## Testing
+
+Tested on:
+- ✅ Chrome, Firefox, Safari
+- ✅ Desktop, tablet, mobile
+- ✅ Different screen sizes
+- ✅ Slow network (to test loading states)
+
+All features work smoothly!
+
+---
+
+## Future Improvements
+
+If we had more time:
+- Add charts to reports page (line chart for revenue over time)
+- Add date range filter for reports
+- Add email preview before sending
+- Add notification center to see all notifications
+- Add option to export multiple events at once
+
+But for a 2-day sprint, we delivered everything we planned!
+
+---
+
+*Prepared by:* Muneera Aman (Frontend Lead)  
+*Last Updated:* December 2, 2025  
+*Sprint:* Sprint 4 Complete ✅
