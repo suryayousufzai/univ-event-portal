@@ -35,7 +35,7 @@ The Product Backlog is the only repository for work items in the University Even
 |US-017|As a user, I want to switch between English and local language so I can use the portal easily.|Language toggle works; translations accurate.|Low|8|Sprint 5|Frontend Lead (Muneera)|
 |US-018|As an admin, I want an audit log so I can track system activities.|Log records login, registration, payment, admin changes.|Medium|8|Sprint 5|Backend Lead (Fariba)|
 |US-019|As a user, I want the portal to be accessible so I can use it with assistive technologies.|Meets WCAG AA standards; screen reader friendly.|Medium|8|Sprint 5|Frontend Lead (Muneera) + QA (Gita)|
-|US-020|I would prefer role based access control as a system where only the admins can use the features of an admin.|Non admins unable to access pages of admins; experimented with numerous roles.|High|5|Sprint 3|Backend Lead (Fariba)|
+
 
 **Enhancement Tasks**
 
