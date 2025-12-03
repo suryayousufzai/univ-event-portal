@@ -857,3 +857,330 @@ The database now fully supports all three sprints:
 Everything is connected properly, data stays consistent, and performance is good. The stored procedures make the API code cleaner and the triggers handle seat management automatically.
 
 All user stories from Sprint 3 are supported by the database layer.
+
+## Sprint 4 – Reports, Export, and Notifications
+
+Sprint 4 was our shortest sprint - just 2 days. We focused on adding features to help admins understand how the portal is being used and to keep users informed.
+
+What Changed in Sprint 4
+Sprint 4 didn't add any new core tables. We added new queries and views to work with existing data in smarter ways.
+
+The three main features:
+1. Reports dashboard (show statistics)
+2. Export attendees (CSV and PDF)
+3. Email notifications (track what emails should be sent)
+
+1. New Queries for Reports Dashboard
+These queries calculate statistics for the admin dashboard.
+
+**Query 1: Total Events**
+
+```sql
+SELECT COUNT(*) AS total_events FROM events;
+```
+
+Just counts how many events exist in the system.
+
+**Query 2: Total Registrations**
+
+```sql
+SELECT COUNT(*) AS total_registrations FROM registrations;
+```
+
+**Query 3: Total Revenue**
+
+```sql
+SELECT COALESCE(SUM(amount), 0) AS total_revenue 
+FROM payments 
+WHERE status = 'success';
+```
+
+Adds up all successful payments to show total money collected.
+
+**Query 4: Active Users**
+
+```sql
+SELECT COUNT(DISTINCT user_id) AS active_users 
+FROM registrations;
+```
+
+Counts unique users who have registered for at least one event.
+
+**Combined Reports Query**
+
+I combined all four into one query that runs faster:
+
+```sql
+SELECT 
+    (SELECT COUNT(*) FROM events) AS total_events,
+    (SELECT COUNT(*) FROM registrations) AS total_registrations,
+    (SELECT COALESCE(SUM(amount), 0) FROM payments WHERE status = 'success') AS total_revenue,
+    (SELECT COUNT(DISTINCT user_id) FROM registrations) AS active_users;
+```
+
+This returns all four statistics in one database call instead of four separate calls.
+
+### 2. Query for Export Attendees
+
+This query gets all attendee information for a specific event, ready to export.
+
+```sql
+SELECT 
+    u.name AS attendee_name,
+    u.email AS attendee_email,
+    r.registration_date,
+    r.payment_status,
+    r.ticket_code,
+    p.amount AS payment_amount,
+    p.payment_date
+FROM registrations r
+JOIN users u ON r.user_id = u.user_id
+LEFT JOIN payments p ON r.reg_id = p.reg_id
+WHERE r.event_id = ?
+ORDER BY r.registration_date DESC;
+```
+
+This gives us everything we need for the CSV/PDF export:
+- Attendee name and email
+- When they registered
+- Whether they paid
+- Their unique ticket code
+- How much they paid and when
+
+### 3. Optional: Email Notifications Table
+
+I created a table to track what emails should be sent. This is useful for implementing a proper email queue system later.
+
+```sql
+CREATE TABLE email_notifications (
+    notification_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    email_type ENUM('registration', 'payment', 'cancellation') NOT NULL,
+    event_id INT NOT NULL,
+    sent_status ENUM('pending', 'sent', 'failed') DEFAULT 'pending',
+    sent_at DATETIME,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (event_id) REFERENCES events(event_id) ON DELETE CASCADE
+);
+```
+
+**How it works:**
+1. When someone registers, we INSERT a new row with email_type = 'registration'
+2. The backend checks this table for pending emails
+3. After sending, we UPDATE sent_status to 'sent'
+4. If sending fails, we mark it as 'failed' and can retry later
+
+For our project, we're just simulating email sending, but this table structure is ready for real implementation.
+
+### 4. Trigger: Auto-Create Email Notification on Registration
+
+This trigger automatically creates an email notification entry when someone registers.
+
+```sql
+DELIMITER //
+
+CREATE TRIGGER create_registration_email
+AFTER INSERT ON registrations
+FOR EACH ROW
+BEGIN
+    INSERT INTO email_notifications (user_id, email_type, event_id)
+    VALUES (NEW.user_id, 'registration', NEW.event_id);
+END //
+
+DELIMITER ;
+```
+
+Now every time someone registers, an email notification is automatically queued.
+
+---
+
+### 5. Trigger: Auto-Create Email Notification on Payment
+
+Same thing for payments:
+
+```sql
+DELIMITER //
+
+CREATE TRIGGER create_payment_email
+AFTER INSERT ON payments
+FOR EACH ROW
+BEGIN
+    DECLARE v_user_id INT;
+    DECLARE v_event_id INT;
+    
+    -- Get user_id and event_id from the registration
+    SELECT r.user_id, r.event_id INTO v_user_id, v_event_id
+    FROM registrations r
+    WHERE r.reg_id = NEW.reg_id;
+    
+    -- Create email notification
+    INSERT INTO email_notifications (user_id, email_type, event_id)
+    VALUES (v_user_id, 'payment', v_event_id);
+END //
+
+DELIMITER ;
+```
+
+---
+
+### 6. Index for Faster Export Queries
+
+Since we'll be querying registrations by event_id a lot for exports, I added an index:
+
+```sql
+CREATE INDEX idx_registrations_event_export ON registrations(event_id, registration_date);
+```
+
+This makes the export query much faster, especially when events have hundreds of attendees.
+
+### 7. View for Easy Export Data
+
+Created a view to simplify getting export data:
+
+```sql
+CREATE VIEW attendee_export_view AS
+SELECT 
+    e.event_id,
+    e.title AS event_title,
+    u.name AS attendee_name,
+    u.email AS attendee_email,
+    r.registration_date,
+    r.payment_status,
+    r.ticket_code,
+    COALESCE(p.amount, 0) AS amount_paid
+FROM events e
+JOIN registrations r ON e.event_id = r.event_id
+JOIN users u ON r.user_id = u.user_id
+LEFT JOIN payments p ON r.reg_id = p.reg_id;
+```
+
+Now exporting is just:
+
+```sql
+SELECT * FROM attendee_export_view WHERE event_id = ?;
+```
+
+Much simpler!
+
+---
+
+## Testing Sprint 4 Features
+
+**Test Reports Query:**
+
+```sql
+SELECT 
+    (SELECT COUNT(*) FROM events) AS total_events,
+    (SELECT COUNT(*) FROM registrations) AS total_registrations,
+    (SELECT COALESCE(SUM(amount), 0) FROM payments WHERE status = 'success') AS total_revenue,
+    (SELECT COUNT(DISTINCT user_id) FROM registrations) AS active_users;
+```
+
+**Result:**
+- total_events: 10
+- total_registrations: 15
+- total_revenue: 875.00
+- active_users: 8
+
+**Test Export Query:**
+
+```sql
+SELECT * FROM attendee_export_view WHERE event_id = 1;
+```
+
+Returns all attendees for event ID 1 with their info ready for CSV/PDF.
+
+**Test Email Notifications:**
+
+```sql
+SELECT * FROM email_notifications WHERE sent_status = 'pending';
+```
+
+Shows all emails that need to be sent.
+
+---
+
+## What I Learned in Sprint 4
+The main challenge was making queries efficient. At first, I was running 4 separate queries for the reports dashboard, which meant 4 database calls. By combining them into one query, the dashboard loads much faster.
+
+I also learned about views - they're like saved queries that make complex JOINs easier to use. The attendee_export_view makes the export code so much cleaner.
+
+The email notifications table structure is ready for a real email queue system. Right now we're just simulating emails, but the database layer is ready for when we want to implement PHPMailer for real.
+
+### Updated Schema with Sprint 4
+
+```
+┌─────────────┐         ┌──────────────┐
+│   users     │         │   events     │
+├─────────────┤         ├──────────────┤
+│ user_id (PK)│────┐    │ event_id (PK)│
+│ name        │    │    │ title        │
+│ email       │    │    │ capacity     │
+│ password    │    │    │ available_   │
+│ role        │    │    │   seats      │
+└─────────────┘    │    │ created_by   │
+      │            │    └──────────────┘
+      │            │            │
+      │            │            ▼
+      │            │    ┌──────────────┐
+      │            └───>│registrations │
+      │                 ├──────────────┤
+      │                 │ reg_id (PK)  │
+      │                 │ user_id (FK) │
+      │                 │ event_id(FK) │
+      │                 │ ticket_code  │
+      │                 └──────────────┘
+      │                    │      │
+      │                    │      └─────┐
+      │                    ▼            │
+      │            ┌──────────────┐     │
+      │            │  payments    │     │
+      │            ├──────────────┤     │
+      │            │ payment_id   │     │
+      │            │ reg_id (FK)  │     │
+      │            │ amount       │     │
+      │            └──────────────┘     │
+      │                                 │
+      │                                 ▼
+      │                    ┌──────────────────────┐
+      └───────────────────>│ email_notifications  │
+                           ├──────────────────────┤
+                           │ notification_id (PK) │
+                           │ user_id (FK)         │
+                           │ email_type           │
+                           │ event_id (FK)        │
+                           │ sent_status          │
+                           └──────────────────────┘
+```
+
+---
+
+## Time Spent on Sprint 4 Database Work
+
+**3 hours total:**
+- 1 hour - writing and testing queries
+- 1 hour - creating views and indexes
+- 1 hour - email notifications table and triggers
+
+Sprint 4 was lighter on database work because we didn't add complex features. We just used existing data in new ways.
+
+---
+
+## Sprint 4 Summary
+
+**Sprint 4 Completed:**
+✅ Reports dashboard queries (combined for performance)
+✅ Attendee export view
+✅ Email notifications table structure
+✅ Auto-trigger for email queue
+✅ Export optimization indexes
+
+The database now fully supports all four sprints. Sprint 4 added reporting and export capabilities without making the database more complex. We just added smart queries and views to work with data we already have.
+
+The email notifications infrastructure is ready for when we implement real email sending with PHPMailer.
+
+All queries are optimized and tested. The portal is ready for real-world use!
+
+Total Database Work: 24 hours across 4 sprints (Sprint 4: 3 hours)
+
