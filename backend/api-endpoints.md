@@ -638,4 +638,234 @@ fetch('/api/admin/events/2/attendees', {
 
 All endpoints follow RESTful conventions and include proper validation, authentication, and error handling.
 
+---
 
+
+## Sprint 4 - Reports, Export & Notifications Endpoints
+
+Sprint 4 added 4 new endpoints for reports, export features, and email notifications.
+
+---
+
+### Get Reports Dashboard
+*GET* /api/admin/reports
+
+*Description:* Get statistics for the reports dashboard
+
+*Authentication:* Required (Admin only)
+
+*Success Response (200):*
+```json
+{
+  "success": true,
+  "data": {
+    "totalEvents": 12,
+    "totalRegistrations": 45,
+    "totalRevenue": 875.00,
+    "activeUsers": 23
+  }
+}
+```
+
+*What the numbers mean:*
+- `totalEvents` - Total number of events created
+- `totalRegistrations` - Total registrations across all events
+- `totalRevenue` - Sum of all successful payments
+- `activeUsers` - Number of unique users who registered for at least one event
+
+*Error Responses:*
+- 401: Not authenticated
+- 403: Admin privileges required
+
+---
+
+### Export Attendees as CSV
+*GET* /api/admin/events/:eventId/attendees/export-csv
+
+*Description:* Download attendees list as CSV file
+
+*Authentication:* Required (Admin only)
+
+*Parameters:*
+- `eventId` - The ID of the event (in URL)
+
+*Success Response (200):*
+
+Downloads a CSV file: `EventTitle_attendees.csv`
+
+Example CSV content:
+```
+Name,Email,Registration Date,Payment Status,Ticket Code
+"Surya Yousufzai","surya@student.edu","2025-12-01 10:30:00","Paid","ABCD-1234-EFGH"
+"Fariba Mohammadi","fariba@student.edu","2025-12-01 11:15:00","Paid","IJKL-5678-MNOP"
+"Marwa Ahmed","marwa@student.edu","2025-12-01 14:20:00","Free","QRST-9012-UVWX"
+```
+
+*Error Responses:*
+- 401: Not authenticated
+- 403: Admin privileges required
+- 404: Event not found
+
+---
+
+### Export Attendees as PDF
+*GET* /api/admin/events/:eventId/attendees/export-pdf
+
+*Description:* Download attendees list as PDF file
+
+*Authentication:* Required (Admin only)
+
+*Parameters:*
+- `eventId` - The ID of the event (in URL)
+
+*Success Response (200):*
+
+Downloads a PDF file: `EventTitle_attendees.pdf`
+
+The PDF contains a formatted table with:
+- Event name as header
+- Table with columns: Name, Email, Registration Date, Payment Status, Ticket Code
+- All attendee data
+
+*Error Responses:*
+- 401: Not authenticated
+- 403: Admin privileges required
+- 404: Event not found
+
+*Note:* In the current implementation, this returns a simple text-based format. For production, we would use a PDF library like TCPDF for professional formatting.
+
+---
+
+### Send Email Notification
+*POST* /api/admin/notifications/send
+
+*Description:* Send email notification to user (simulated for demo)
+
+*Authentication:* Required
+
+*Request:*
+```json
+{
+  "email": "user@example.com",
+  "type": "registration",
+  "eventTitle": "Tech Innovation Summit 2025",
+  "ticketCode": "ABCD-1234-EFGH-5678"
+}
+```
+
+*Email Types:*
+- `registration` - Sent after user registers for event
+- `payment` - Sent after payment is processed
+- `cancellation` - Sent after registration is cancelled
+
+*Success Response (200):*
+```json
+{
+  "success": true,
+  "message": "Email notification sent",
+  "data": {
+    "to": "user@example.com",
+    "type": "registration",
+    "subject": "Registration Confirmed for Tech Innovation Summit 2025",
+    "sent": true,
+    "timestamp": "2025-12-02 14:30:00"
+  }
+}
+```
+
+*Error Responses:*
+- 400: Missing required fields
+- 400: Invalid email format
+
+*Note:* This is simulated for demo purposes. In production, this would integrate with PHPMailer and Gmail SMTP to send real emails.
+
+---
+
+## Sprint 4 Testing Examples
+
+### Test Reports Dashboard
+```javascript
+fetch('/api/admin/reports', {
+  method: 'GET',
+  headers: { 
+    'Authorization': 'Bearer ' + token
+  }
+})
+.then(response => response.json())
+.then(data => {
+  console.log('Total Events:', data.data.totalEvents);
+  console.log('Total Revenue:', data.data.totalRevenue);
+});
+```
+
+### Test CSV Export
+```javascript
+// Simple way - just redirect to download
+window.location.href = '/api/admin/events/1/attendees/export-csv';
+
+// Or with fetch
+fetch('/api/admin/events/1/attendees/export-csv', {
+  headers: { 'Authorization': 'Bearer ' + token }
+})
+.then(response => response.blob())
+.then(blob => {
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'attendees.csv';
+  a.click();
+});
+```
+
+### Test PDF Export
+```javascript
+// Same as CSV, just change the URL
+window.location.href = '/api/admin/events/1/attendees/export-pdf';
+```
+
+### Test Email Notification
+```javascript
+fetch('/api/admin/notifications/send', {
+  method: 'POST',
+  headers: { 
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer ' + token
+  },
+  body: JSON.stringify({
+    email: 'user@example.com',
+    type: 'registration',
+    eventTitle: 'Tech Summit',
+    ticketCode: 'ABCD-1234-EFGH'
+  })
+})
+.then(response => response.json())
+.then(data => console.log('Email sent:', data));
+```
+
+---
+
+## Sprint 4 Summary
+
+**New Endpoints:** 4
+
+1. **GET /api/admin/reports** - Dashboard statistics
+2. **GET /api/admin/events/:id/attendees/export-csv** - CSV export
+3. **GET /api/admin/events/:id/attendees/export-pdf** - PDF export  
+4. **POST /api/admin/notifications/send** - Email notifications
+
+**Story Points:** 15
+- ENHANCE-001: Export Enhancements (5 points)
+- US-015: Basic Reports (5 points)
+- US-016: Email Notifications (5 points)
+
+**What's Simulated:**
+- PDF export uses simple text format (would use TCPDF in production)
+- Email notifications just return JSON (would use PHPMailer in production)
+
+**What Works:**
+- Reports dashboard with accurate calculations
+- CSV export with proper formatting
+- PDF export with basic structure
+- Email notification API ready for integration
+
+All endpoints tested and working! Ready for production with minor enhancements.
