@@ -18,6 +18,8 @@
 - [Daily Scrum #15 - Nov 29](https://drive.google.com/file/d/1KZ66nooW22zP6Xab2odz0a1bdju9_OGp/view?usp=sharing)
 - [Daily Scrum #16 - Dec 01](https://drive.google.com/file/d/1EahINqG-NseHXdvDXhaj1zphSsilNI1N/view?usp=drive_link)
 - [Daily Scrum #17 - Dec 02](https://drive.google.com/file/d/1vk6SznsMxDviHV56yj55ZhrmXg-OIDhS/view?usp=drive_link)
+- [Daily Scrum #18 - Dec 03](https://drive.google.com/file/d/11rycCakMPBiEbTJT_hbwY86m7vypfo7L/view?usp=drive_link)
+- [Daily Scrum #19 - Dec 04](https://drive.google.com/file/d/1GE0YYsJ_7UCfjM_xL9tBGa1WB50UJH9V/view?usp=drive_link)
 
 ## Sprint Meetings
 - [Sprint Planning - Nov 15](https://drive.google.com/file/d/1Yn_7Hgd3VIrc44z7N1HVpHQUrDeK38Oe/view)
@@ -26,6 +28,7 @@
 - [Sprint Review and Sprint Retrospective - Nov 30](https://drive.google.com/file/d/1gx7cd6OuI-Kg1QTXH0Z8aknuLXpimYFv/view?usp=drive_link)
 - [Sprint Planning - Dec 01](https://drive.google.com/file/d/1EahINqG-NseHXdvDXhaj1zphSsilNI1N/view?usp=drive_link)
 - [Sprint Review and Sprint Retrospective - Dec 02](https://drive.google.com/file/d/1tkN0wF7hssymXE_SJW07WLIRfzEPKPLX/view?usp=drive_link)
+- [Sprint Planning - Dec 03](https://drive.google.com/file/d/11rycCakMPBiEbTJT_hbwY86m7vypfo7L/view?usp=drive_link)
 ```
 
 ---
