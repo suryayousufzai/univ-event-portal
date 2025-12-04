@@ -4,7 +4,7 @@
 **Sprint:** Sprint 5 - Day 1  
 **Date:** December 3, 2025  
 **Time:** 10:00 AM  
-**Duration:** 15 minutes  
+**Duration:** 11 minutes  
 **Scrum Master:** Surya Yousufzai
 
 ---
