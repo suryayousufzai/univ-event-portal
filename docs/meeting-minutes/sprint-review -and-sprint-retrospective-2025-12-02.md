@@ -304,7 +304,7 @@ All three features are **ACCEPTED** for production:
 
 ---
 
-**Meeting Recorded:** ()
+**Meeting Recorded:** (https://drive.google.com/file/d/1tkN0wF7hssymXE_SJW07WLIRfzEPKPLX/view?usp=drive_link)
 
 **Minutes Prepared by:** Surya Yousufzai (Scrum Master)  
 **Date:** December 2, 2025  
