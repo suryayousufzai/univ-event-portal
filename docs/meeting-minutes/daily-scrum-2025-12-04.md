@@ -3,7 +3,7 @@
 **Project:** University Event Registration Portal  
 **Meeting Type:** Daily Scrum (Sprint 5 – Day 2)  
 **Date:** December 4, 2025  
-**Duration:** 12 minutes  
+**Duration:** 9 minutes  
 **Platform:** Zoom / Recorded
 
 ---
@@ -125,7 +125,7 @@ This was the second daily Scrum for Sprint 5. The goal was to discuss progress o
 
 ## Recording
 
-* **Recording link:** 
+* **Recording link:**(https://drive.google.com/file/d/1GE0YYsJ_7UCfjM_xL9tBGa1WB50UJH9V/view?usp=drive_link)
 
 ---
 
