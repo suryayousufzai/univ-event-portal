@@ -1,4 +1,4 @@
-# Daily Scrum - December 3, 2025
+# Daily Scrum and planning - December 3, 2025
 
 **Project:** University Event Registration Portal  
 **Sprint:** Sprint 5 - Day 1  
@@ -134,6 +134,7 @@
 ## Recording
 
 * **Recording link:**
+(https://drive.google.com/file/d/11rycCakMPBiEbTJT_hbwY86m7vypfo7L/view?usp=drive_link)
 ---
 
 ## Next Daily Scrum
