@@ -407,7 +407,7 @@ Excellent work, team. The portal is ready for pilot testing.
 
 
   
-**Document Prepared by:** Surya Yousufzai (Scrum Master)  
+**Document Prepared by:** Marwa Paiman (Product Owner) and Surya Yousufzai (Scrum Master)  
 
 **Reviewed by:** Marwa Paiman (Product Owner)
 
