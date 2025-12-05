@@ -100,7 +100,7 @@ Sprint 5 burndown chart shows our best performance. We stayed on track with the 
 | Sprint 4 | 2 days | 15 | 7.5 pts/day |
 | Sprint 5 | 3 days | 24 | **8 pts/day** |
 
-**Sprint 5 achieved the highest daily velocity!** 🎉
+**Sprint 5 achieved the highest daily velocity!** 
 
 ---
 
