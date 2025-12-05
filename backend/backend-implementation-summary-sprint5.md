@@ -369,7 +369,7 @@ seatsAvailable = 80 + 1 = 81
 ```javascript
 {
   id: 123456789,
-  name: "fariba Doe",
+  name: "fariba mohammad",
   email: "fariba@student.edu",
   studentId: "STU123456",
   password: "hashed_password",
